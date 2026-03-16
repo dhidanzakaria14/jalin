@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JALIN | Wedding & Empowerment</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="container nav-flex">
+            <div class="nav-left">
+                <div class="logo" onclick="window.location.href='index.html'">JALIN<span>.</span></div>
+                
+                <div class="nav-item dropdown">
+                    <span id="current-location">📍 Pilih Daerah</span>
+                    <div class="dropdown-content">
+                        <div class="dropdown-header">Daerah Populer</div>
+                        <a href="#" onclick="changeLocation('Jakarta')">Jakarta</a>
+                        <a href="#" onclick="changeLocation('Bandung')">Bandung</a>
+                        <a href="#" onclick="changeLocation('Surabaya')">Surabaya</a>
+                        <a href="#" onclick="changeLocation('Bali')">Bali</a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-item promo-tag">🎁 Diskon & Promo</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="nav-item dropdown">
+                    <span>For Business</span>
+                    <div class="dropdown-content">
+                        <a href="login.html">Daftar Vendor</a>
+                        <a href="login.html">Daftar Freelance</a>
+                    </div>
+                </div>
+                <a href="vendor.html" class="nav-item">Cari Vendor</a>
+                <a href="assignment.html" class="nav-item">Assignment Project</a>
+                
+                <div id="auth-area" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="login.html" class="btn-log">Log In</a>
+                    <a href="#" class="btn-reg">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-awal">
+        <div class="hero-overlay">
+            <div class="container hero-content">
+                <h1>Wujudkan Pernikahan Impian <br><span>& Berbagi Dampak Sosial</span></h1>
+                <p>Platform pertama yang menghubungkan momen bahagia Anda dengan pemberdayaan UMKM dan talenta muda lokal.</p>
+                <div class="hero-buttons">
+                    <a href="vendor.html" class="btn-primary">Cari Vendor Sekarang</a>
+                    <a href="#tentang-kami" class="btn-outline-hero">Tentang Kami</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="search" class="container">
+        <div class="search-floating">
+            <div class="search-grid">
+                <div class="search-item">
+                    <label>📍 Lokasi Acara</label>
+                    <input type="text" id="search-location" placeholder="Masukkan Kota/Wilayah...">
+                </div>
+                <div class="search-item">
+                    <label>📅 Tanggal Rencana</label>
+                    <input type="date">
+                </div>
+                <div class="search-item">
+                    <label>🍱 Kategori Layanan</label>
+                    <select>
+                        <option>Semua Layanan</option>
+                        <option>Catering UMKM</option>
+                        <option>MUA Freelance (Mahasiswa)</option>
+                        <option>Dekorasi Lokal</option>
+                        <option>Hantaran Kreatif</option>
+                    </select>
+                </div>
+                <button class="btn-search-trigger" onclick="window.location.href='vendor.html'">Cari Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="tentang-kami" class="section-padding">
+        <div class="container">
+            <div class="about-flex">
+                <div class="about-text">
+                    <p class="subtitle">Mengenal JALIN</p>
+                    <h2 class="section-title">Menjalin Kebahagiaan, <br>Membangun Masa Depan.</h2>
+                    <p><strong>JALIN</strong> adalah marketplace pernikahan pertama di Indonesia yang mengintegrasikan konsep <em>social enterprise</em>. Kami percaya setiap pernikahan bisa menjadi sarana pemberdayaan.</p>
+                    <p style="margin-top: 15px;">Melalui JALIN, Anda tidak hanya menyewa jasa, tetapi juga berkontribusi pada pencapaian SDGs melalui pemberdayaan UMKM dan pembukaan lapangan kerja kreatif bagi mahasiswa.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h4>500+</h4>
+                        <p>Mitra UMKM Aktif</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>200+</h4>
+                        <p>Mahasiswa Freelancer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="section-padding" style="background: #fffafb;">
+        <div class="container text-center">
+            <p class="subtitle">Social Impact</p>
+            <h2 class="section-title">Kontribusi JALIN untuk SDGs</h2>
+            <div class="grid-sdg">
+                <div class="card-sdg">
+                    <span class="badge b-4">SDG 1</span>
+                    <h3>Tanpa Kemiskinan</h3>
+                    <p>Meningkatkan pendapatan ekonomi kelompok UMKM menengah ke bawah.</p>
+                </div>
+                <div class="card-sdg">
+                    <span class="badge b-8">SDG 4</span>
+                    <h3>Pendidikan Berkualitas</h3>
+                    <p>Wadah praktik kerja nyata bagi mahasiswa kreatif di industri pernikahan.</p>
+                </div>
+                <div class="card-sdg">
+                    <span class="badge b-10">SDG 8</span>
+                    <h3>Pekerjaan Layak</h3>
+                    <p>Membuka pasar bagi talenta daerah untuk bersaing secara profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center" style="padding: 40px; color: #999;">
+        <p>© 2026 JALIN Project - UPN Jatim Assignment. <br> ilmu2.upnjatim.ac.id</p>
+    </footer>
+
+    <script>
+        // Fungsi untuk mengubah lokasi di navbar
+        function changeLocation(city) {
+            document.getElementById('current-location').innerText = "📍 " + city;
+            document.getElementById('search-location').value = city;
+        }
+
+        // Logic login simulasi dari URL Params
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('user');
+        if (userName) {
+            const authArea = document.getElementById('auth-area');
+            authArea.innerHTML = `
+                <a href="#" class="nav-item">My Bookings</a>
+                <div class="nav-item dropdown user-logged">
+                    <span>👤 ${userName}</span>
+                    <div class="dropdown-content">
+                        <a href="dashboard.html">Profil Saya</a>
+                        <a href="index.html">Keluar (Logout)</a>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

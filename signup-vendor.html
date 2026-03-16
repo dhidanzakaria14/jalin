@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Mitra | JALIN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vendor-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+   <nav class="main-nav">
+    <div class="container nav-flex">
+        <div class="logo" onclick="window.location.href='index.html'">JALIN<span>.</span></div>
+        <div class="nav-right">
+             <a href="login.html" class="nav-item">Sudah punya akun? Log In</a>
+        </div>
+    </div>
+</nav>
+
+
+
+    <main class="register-wrapper">
+        <div class="container" style="max-width: 600px;">
+            <div class="form-container" style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 2px solid #fff0f3;">
+                <h2 class="text-center" style="color: #d14d72; margin-bottom: 10px;">Gabung Sebagai Mitra 💼</h2>
+                <p class="text-center" style="font-size: 14px; color: #666; margin-bottom: 30px;">Tumbuh bersama JALIN dan dukung ekonomi lokal.</p>
+
+                <form action="dashboard.html">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label style="display:block; font-size: 12px; font-weight: 600; margin-bottom: 5px;">Nama Bisnis/Vendor</label>
+                            <input type="text" placeholder="Nama brand" style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;" required>
+                        </div>
+                        <div>
+                            <label style="display:block; font-size: 12px; font-weight: 600; margin-bottom: 5px;">Kategori Jasa</label>
+                            <select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;">
+                                <option>MUA</option>
+                                <option>Catering</option>
+                                <option>Dekorasi</option>
+                                <option>Fotografi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label style="display:block; font-size: 12px; font-weight: 600; margin-bottom: 5px;">Tipe Kemitraan (Impact Category)</label>
+                        <select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #fffafb;">
+                            <option value="umkm">UMKM Lokal (Dukung SDG 1 & 8)</option>
+                            <option value="mahasiswa">Freelance Mahasiswa (Dukung SDG 4)</option>
+                            <option value="profesional">Profesional/Perusahaan</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label style="display:block; font-size: 12px; font-weight: 600; margin-bottom: 5px;">Link Portofolio (Instagram/Website)</label>
+                        <input type="text" placeholder="http://instagram.com/..." style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;">
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display:block; font-size: 12px; font-weight: 600; margin-bottom: 5px;">Email Bisnis</label>
+                        <input type="email" placeholder="bisnis@mail.com" style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;" required>
+                    </div>
+
+                    <button type="submit" class="btn-reg" style="width: 100%; border: none; padding: 15px; font-size: 16px; cursor: pointer; background: #d14d72;">Daftar Sebagai Mitra</button>
+                    
+                    <p class="text-center" style="margin-top: 20px; font-size: 12px; color: #999;">
+                        Dengan mendaftar, Anda menyetujui syarat & ketentuan kemitraan JALIN.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

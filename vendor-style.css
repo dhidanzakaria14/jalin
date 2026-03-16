@@ -1,0 +1,175 @@
+/* vendor-style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.register-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* BACKGROUND IMAGE: Biar gak polos, pakai foto dekorasi wedding */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+}
+
+.form-container {
+    background: #ffffff;
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Garis pink elegan di atas form */
+.form-container::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(to right, #d14d72, #ffb7c5);
+}
+
+.form-container h2 {
+    color: #333;
+    font-size: 26px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.form-container p {
+    color: #777;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* Layout Grid untuk Input */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #d14d72;
+    margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #d14d72;
+    outline: none;
+    background-color: #fffafb;
+}
+
+.btn-vendor {
+    width: 100%;
+    padding: 15px;
+    background: #d14d72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-vendor:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.form-footer a {
+    color: #d14d72;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Responsif buat HP */
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+/* Navigasi Utama */
+.main-nav {
+    background: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed; /* Supaya tetap di atas saat scroll */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Styling Logo */
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #d14d72; /* Titik pink khas JALIN */
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Berikan jarak pada wrapper agar tidak tertutup nav yang fixed */
+.register-wrapper {
+    padding-top: 100px; 
+}
