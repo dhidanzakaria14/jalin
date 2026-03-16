@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Peran | JALIN</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="container nav-flex">
+            <div class="logo" onclick="window.location.href='index.html'">JALIN<span>.</span></div>
+            <a href="login.html" class="nav-item">Sudah punya akun? Log In</a>
+        </div>
+    </nav>
+
+    <main class="register-wrapper">
+        <div class="container">
+            <div class="register-header text-center">
+                <p class="subtitle">Bergabung dengan JALIN</p>
+                <h2 class="section-title">Bagaimana Anda ingin bergabung?</h2>
+                <p class="description">Pilih jenis akun untuk menyesuaikan pengalaman Anda di platform kami.</p>
+            </div>
+            
+            <div class="selection-grid">
+                <div class="role-card" onclick="window.location.href='signup-client.html'">
+                    <div class="icon-circle">💍</div>
+                    <h3>Calon Pengantin</h3>
+                    <p>Cari vendor impian, kelola budget, dan dukung pemberdayaan lokal.</p>
+                    <span class="btn-select">Pilih Sebagai Pengantin</span>
+                </div>
+
+                <div class="role-card highlight" onclick="window.location.href='signup-vendor.html'">
+                    <div class="icon-circle">💼</div>
+                    <h3>Mitra (Vendor/Freelance)</h3>
+                    <p>Tawarkan jasa Anda (UMKM/Mahasiswa) dan jangkau lebih banyak klien.</p>
+                    <span class="btn-select-alt">Pilih Sebagai Mitra</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
