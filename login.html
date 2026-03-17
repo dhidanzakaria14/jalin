@@ -3,45 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilih Peran | JALIN</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="login.css">
+    <title>Login | JALIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-[#fffafb] min-h-screen flex items-center justify-center p-6 text-gray-800">
 
-    <nav class="main-nav">
-        <div class="container nav-flex">
-            <div class="logo" onclick="window.location.href='index.html'">JALIN<span>.</span></div>
-            <a href="login.html" class="nav-item">Sudah punya akun? Log In</a>
-        </div>
-    </nav>
-
-    <main class="register-wrapper">
-        <div class="container">
-            <div class="register-header text-center">
-                <p class="subtitle">Bergabung dengan JALIN</p>
-                <h2 class="section-title">Bagaimana Anda ingin bergabung?</h2>
-                <p class="description">Pilih jenis akun untuk menyesuaikan pengalaman Anda di platform kami.</p>
+    <div class="max-w-md w-full">
+        <div class="text-center mb-8">
+            <div class="text-3xl font-bold text-[#d14d72] cursor-pointer inline-block" onclick="window.location.href='index.html'">
+                JALIN<span class="text-[#ffb7c5]">.</span>
             </div>
+            <p class="text-gray-500 text-sm mt-2">Wujudkan momen indah sekaligus berbagi dampak sosial.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-[2rem] shadow-2xl shadow-pink-100/50 border border-pink-50">
+            <h2 class="text-xl font-bold text-gray-800 mb-6 text-center">Selamat Datang Kembali</h2>
             
-            <div class="selection-grid">
-                <div class="role-card" onclick="window.location.href='signup-client.html'">
-                    <div class="icon-circle">💍</div>
-                    <h3>Calon Pengantin</h3>
-                    <p>Cari vendor impian, kelola budget, dan dukung pemberdayaan lokal.</p>
-                    <span class="btn-select">Pilih Sebagai Pengantin</span>
+            <form id="loginForm" class="space-y-5">
+                <div class="space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Email</label>
+                    <input type="email" id="email" required placeholder="Masukkan email Anda" 
+                        class="w-full px-4 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition placeholder:text-gray-300">
                 </div>
 
-                <div class="role-card highlight" onclick="window.location.href='signup-vendor.html'">
-                    <div class="icon-circle">💼</div>
-                    <h3>Mitra (Vendor/Freelance)</h3>
-                    <p>Tawarkan jasa Anda (UMKM/Mahasiswa) dan jangkau lebih banyak klien.</p>
-                    <span class="btn-select-alt">Pilih Sebagai Mitra</span>
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center ml-1">
+                        <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider">Password</label>
+                        <a href="#" class="text-[11px] font-bold text-pink-300 hover:text-[#d14d72] transition">Lupa Password?</a>
+                    </div>
+                    <input type="password" id="password" required placeholder="••••••••" 
+                        class="w-full px-4 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition placeholder:text-gray-300">
                 </div>
+
+                <button type="submit" 
+                    class="w-full bg-[#d14d72] text-white py-4 rounded-xl font-bold shadow-lg shadow-pink-200 hover:bg-[#b03d5d] transform active:scale-95 transition duration-300 mt-4 uppercase tracking-widest text-sm">
+                    Masuk Sekarang
+                </button>
+            </form>
+
+            <div class="relative my-8">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-100"></div></div>
+                <div class="relative flex justify-center text-[10px] uppercase tracking-[0.2em]"><span class="bg-white px-4 text-gray-400">Atau masuk dengan</span></div>
             </div>
-        </div>
-    </main>
 
+            <button type="button" onclick="loginGoogleSimulasi(event)" class="w-full border border-gray-100 py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-50 transition text-sm font-semibold text-gray-600 active:scale-95">
+                <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5" alt="Google">
+                Google Akun
+            </button>
+        </div>
+
+        <p class="text-center mt-8 text-sm text-gray-500">
+            Belum punya akun? 
+            <a href="register.html" class="text-[#d14d72] font-bold hover:underline transition">Daftar di sini</a>
+        </p>
+    </div>
+
+    <script>
+        // 1. Simulasi Login Manual dengan LocalStorage
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const userDisplay = email.split('@')[0]; // Ambil nama dari email
+            
+            // SIMPAN DATA KE MEMORI BROWSER
+            localStorage.setItem('userJalin', userDisplay);
+            
+            window.location.href = 'index.html';
+        });
+
+        // 2. Simulasi Login Google dengan LocalStorage
+        function loginGoogleSimulasi(event) {
+            const btn = event.currentTarget;
+            
+            // Efek Loading
+            btn.innerHTML = `<span class="text-xs">Menghubungkan...</span>`;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            
+            setTimeout(() => {
+                const userGoogle = "DHIDAN"; 
+                // SIMPAN DATA KE MEMORI BROWSER
+                localStorage.setItem('userJalin', userGoogle);
+                
+                window.location.href = 'index.html';
+            }, 1000); 
+        }
+    </script>
 </body>
 </html>

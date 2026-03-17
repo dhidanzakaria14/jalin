@@ -1,79 +1,94 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JALIN | Wedding & Empowerment</title>
-    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        /* Animasi halus untuk hero agar lebih premium */
+        .hero-zoom { transition: transform 20s ease-in-out; }
+        .hero-zoom:hover { transform: scale(1.1); }
+    </style>
 </head>
-<body>
+<body class="bg-white overflow-x-hidden">
 
-    <nav class="main-nav">
-        <div class="container nav-flex">
-            <div class="nav-left">
-                <div class="logo" onclick="window.location.href='index.html'">JALIN<span>.</span></div>
+    <nav class="sticky top-0 z-[1000] bg-white py-3 shadow-sm border-b border-gray-50">
+        <div class="w-[85%] mx-auto flex justify-between items-center">
+            
+            <div class="flex items-center gap-5 md:gap-8">
+                <div class="text-2xl font-bold text-[#d14d72] cursor-pointer" onclick="window.location.href='index.html'">
+                    JALIN<span class="text-[#ffb7c5]">.</span>
+                </div>
                 
-                <div class="nav-item dropdown">
-                    <span id="current-location">📍 Pilih Daerah</span>
-                    <div class="dropdown-content">
-                        <div class="dropdown-header">Daerah Populer</div>
-                        <a href="#" onclick="changeLocation('Jakarta')">Jakarta</a>
-                        <a href="#" onclick="changeLocation('Bandung')">Bandung</a>
-                        <a href="#" onclick="changeLocation('Surabaya')">Surabaya</a>
-                        <a href="#" onclick="changeLocation('Bali')">Bali</a>
+                <div class="relative group hidden md:block">
+                    <span id="current-location" class="text-sm font-semibold text-[#d14d72] cursor-pointer hover:text-pink-400 transition">📍 Pilih Daerah</span>
+                    <div class="absolute top-full left-0 mt-2 min-w-[170px] bg-white shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 border border-gray-100">
+                        <div class="p-3 text-[11px] font-bold text-[#ffb7c5] uppercase border-b border-gray-100">Daerah Populer</div>
+                        <a href="#" onclick="changeLocation('Jakarta')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3] transition">Jakarta</a>
+                        <a href="#" onclick="changeLocation('Bandung')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3] transition">Bandung</a>
+                        <a href="#" onclick="changeLocation('Surabaya')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3] transition">Surabaya</a>
+                        <a href="#" onclick="changeLocation('Bali')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3] transition">Bali</a>
                     </div>
                 </div>
 
-                <a href="#" class="nav-item promo-tag">🎁 Diskon & Promo</a>
+                <a href="#" class="hidden lg:block bg-[#fff0f3] text-[#d14d72] px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-pink-100 transition">🎁 Diskon & Promo</a>
             </div>
 
-            <div class="nav-right">
-                <div class="nav-item dropdown">
-                    <span>For Business</span>
-                    <div class="dropdown-content">
-                        <a href="login.html">Daftar Vendor</a>
-                        <a href="login.html">Daftar Freelance</a>
+            <div class="flex items-center gap-5">
+                <div class="relative group hidden md:block cursor-pointer">
+                    <span class="text-sm font-semibold text-[#d14d72]">For Business</span>
+                    <div class="absolute top-full right-0 mt-2 min-w-[170px] bg-white shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 border border-gray-100">
+                        <a href="login.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3]">Daftar Vendor</a>
+                        <a href="login.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3]">Daftar Freelance</a>
                     </div>
                 </div>
-                <a href="vendor.html" class="nav-item">Cari Vendor</a>
-                <a href="assignment.html" class="nav-item">Assignment Project</a>
+                <a href="vendor.html" class="hidden md:block text-sm font-semibold text-[#d14d72] hover:text-pink-400 transition">Cari Vendor</a>
+                <a href="assignment.html" class="hidden lg:block text-sm font-semibold text-[#d14d72] hover:text-pink-400 transition">Assignment Project</a>
                 
-                <div id="auth-area" style="display: flex; align-items: center; gap: 15px;">
-                    <a href="login.html" class="btn-log">Log In</a>
-                    <a href="#" class="btn-reg">Register</a>
+                <div id="auth-area" class="flex items-center gap-4">
+                    <a href="login.html" class="bg-[#fff0f3] text-[#d14d72] px-4 py-2 rounded-md font-bold text-sm border border-[#ffcad4] hover:bg-pink-100 transition">Log In</a>
+                    <a href="register.html" class="bg-[#ffb7c5] text-white px-4 py-2 rounded-md font-bold text-sm border border-[#ffb7c5] hover:bg-[#f7aab9] transition">Register</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero-awal">
-        <div class="hero-overlay">
-            <div class="container hero-content">
-                <h1>Wujudkan Pernikahan Impian <br><span>& Berbagi Dampak Sosial</span></h1>
-                <p>Platform pertama yang menghubungkan momen bahagia Anda dengan pemberdayaan UMKM dan talenta muda lokal.</p>
-                <div class="hero-buttons">
-                    <a href="vendor.html" class="btn-primary">Cari Vendor Sekarang</a>
-                    <a href="#tentang-kami" class="btn-outline-hero">Tentang Kami</a>
-                </div>
+    <header class="h-[75vh] relative flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center hero-zoom" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1350&q=80');"></div>
+        </div>
+        
+        <div class="w-[85%] mx-auto text-white relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                Wujudkan Pernikahan Impian <br><span class="text-[#f7f2f3]"> & Berbagi Dampak Sosial</span>
+            </h1>
+            <p class="text-lg mb-8 max-w-[900px] opacity-90 font-light">
+                Platform pertama yang menghubungkan momen bahagia Anda dengan pemberdayaan UMKM dan talenta muda lokal.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="vendor.html" class="bg-[#f75a79] text-white px-8 py-3.5 rounded-md font-bold hover:bg-[#d14d72] transition duration-300 shadow-lg transform active:scale-95">Cari Vendor Sekarang</a>
+                <a href="#tentang-kami" class="border-2 border-white text-white px-8 py-3.5 rounded-md font-bold hover:bg-white hover:text-[#d14d72] transition duration-300">Tentang Kami</a>
             </div>
         </div>
     </header>
 
-    <div id="search" class="container">
-        <div class="search-floating">
-            <div class="search-grid">
-                <div class="search-item">
-                    <label>📍 Lokasi Acara</label>
-                    <input type="text" id="search-location" placeholder="Masukkan Kota/Wilayah...">
+    <div id="search" class="w-[85%] mx-auto relative z-[50]">
+        <div class="bg-white p-6 rounded-xl shadow-2xl -mt-[60px] border border-gray-50">
+            <div class="flex flex-col md:flex-row gap-4 items-end">
+                <div class="flex-1 w-full space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider">📍 Lokasi Acara</label>
+                    <input type="text" id="search-location" placeholder="Masukkan Kota/Wilayah..." class="w-full p-2.5 border border-gray-100 rounded-md outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition">
                 </div>
-                <div class="search-item">
-                    <label>📅 Tanggal Rencana</label>
-                    <input type="date">
+                <div class="flex-1 w-full space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider">📅 Tanggal Rencana</label>
+                    <input type="date" class="w-full p-2.5 border border-gray-100 rounded-md outline-none focus:ring-2 focus:ring-pink-100 transition">
                 </div>
-                <div class="search-item">
-                    <label>🍱 Kategori Layanan</label>
-                    <select>
+                <div class="flex-1 w-full space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider">🍱 Kategori Layanan</label>
+                    <select class="w-full p-2.5 border border-gray-100 rounded-md outline-none focus:ring-2 focus:ring-pink-100 transition bg-transparent">
                         <option>Semua Layanan</option>
                         <option>Catering UMKM</option>
                         <option>MUA Freelance (Mahasiswa)</option>
@@ -81,60 +96,70 @@
                         <option>Hantaran Kreatif</option>
                     </select>
                 </div>
-                <button class="btn-search-trigger" onclick="window.location.href='vendor.html'">Cari Sekarang</button>
+                <button onclick="window.location.href='vendor.html'" class="w-full md:w-auto bg-[#d14d72] text-white px-8 py-3 rounded-md font-bold hover:bg-[#b03d5d] transition transform active:scale-95 shadow-md">
+                    Cari Sekarang
+                </button>
             </div>
         </div>
     </div>
 
-    <section id="tentang-kami" class="section-padding">
-        <div class="container">
-            <div class="about-flex">
-                <div class="about-text">
-                    <p class="subtitle">Mengenal JALIN</p>
-                    <h2 class="section-title">Menjalin Kebahagiaan, <br>Membangun Masa Depan.</h2>
-                    <p><strong>JALIN</strong> adalah marketplace pernikahan pertama di Indonesia yang mengintegrasikan konsep <em>social enterprise</em>. Kami percaya setiap pernikahan bisa menjadi sarana pemberdayaan.</p>
-                    <p style="margin-top: 15px;">Melalui JALIN, Anda tidak hanya menyewa jasa, tetapi juga berkontribusi pada pencapaian SDGs melalui pemberdayaan UMKM dan pembukaan lapangan kerja kreatif bagi mahasiswa.</p>
+    <section id="tentang-kami" class="py-24">
+        <div class="w-[85%] mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="flex-[2]">
+                    <p class="text-[#210e12] text-sm font-bold tracking-widest mb-2 uppercase italic">Mengenal JALIN</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">Menjalin Kebahagiaan, <br>Membangun Masa Depan.</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4 text-lg">
+                        <strong class="text-gray-800">JALIN</strong> adalah marketplace pernikahan pertama di Indonesia yang mengintegrasikan konsep <em class="text-[#d14d72] font-semibold">social enterprise</em>. Kami percaya setiap pernikahan bisa menjadi sarana pemberdayaan.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Melalui JALIN, Anda tidak hanya menyewa jasa, tetapi juga berkontribusi pada pencapaian SDGs melalui pemberdayaan UMKM dan pembukaan lapangan kerja kreatif bagi mahasiswa.
+                    </p>
                 </div>
-                <div class="about-stats">
-                    <div class="stat-box">
-                        <h4>500+</h4>
-                        <p>Mitra UMKM Aktif</p>
+                <div class="flex-1 w-full space-y-6">
+                    <div class="bg-[#fff0f3] p-8 rounded-2xl text-center border-l-[6px] border-[#ffb7c5] shadow-sm transform hover:-translate-y-1 transition duration-300">
+                        <h4 class="text-4xl font-bold text-[#d14d72]">500+</h4>
+                        <p class="text-sm text-gray-500 font-bold uppercase mt-1">Mitra UMKM Aktif</p>
                     </div>
-                    <div class="stat-box">
-                        <h4>200+</h4>
-                        <p>Mahasiswa Freelancer</p>
+                    <div class="bg-[#fff0f3] p-8 rounded-2xl text-center border-l-[6px] border-[#ffb7c5] shadow-sm transform hover:-translate-y-1 transition duration-300">
+                        <h4 class="text-4xl font-bold text-[#d14d72]">200+</h4>
+                        <p class="text-sm text-gray-500 font-bold uppercase mt-1">Mahasiswa Freelancer</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="impact" class="section-padding" style="background: #fffafb;">
-        <div class="container text-center">
-            <p class="subtitle">Social Impact</p>
-            <h2 class="section-title">Kontribusi JALIN untuk SDGs</h2>
-            <div class="grid-sdg">
-                <div class="card-sdg">
-                    <span class="badge b-4">SDG 1</span>
-                    <h3>Tanpa Kemiskinan</h3>
-                    <p>Meningkatkan pendapatan ekonomi kelompok UMKM menengah ke bawah.</p>
+    <section id="impact" class="py-24 bg-[#fffafb] border-y border-pink-50">
+        <div class="w-[85%] mx-auto text-center">
+            <p class="text-[#210e12] text-sm font-bold tracking-widest uppercase mb-2">Social Impact</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-16">Kontribusi JALIN untuk SDGs</h2>
+            
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="bg-white p-10 rounded-3xl w-full sm:w-[320px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-pink-50 group">
+                    <span class="inline-block bg-[#e56b6f] text-white text-[11px] font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">SDG 1</span>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-[#d14d72] transition">Tanpa Kemiskinan</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Meningkatkan pendapatan ekonomi kelompok UMKM menengah ke bawah secara berkelanjutan.</p>
                 </div>
-                <div class="card-sdg">
-                    <span class="badge b-8">SDG 4</span>
-                    <h3>Pendidikan Berkualitas</h3>
-                    <p>Wadah praktik kerja nyata bagi mahasiswa kreatif di industri pernikahan.</p>
+                <div class="bg-white p-10 rounded-3xl w-full sm:w-[320px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-pink-50 group">
+                    <span class="inline-block bg-[#c95d73] text-white text-[11px] font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">SDG 4</span>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-[#d14d72] transition">Pendidikan Berkualitas</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Wadah praktik kerja nyata bagi mahasiswa kreatif untuk mengasah skill di industri profesional.</p>
                 </div>
-                <div class="card-sdg">
-                    <span class="badge b-10">SDG 8</span>
-                    <h3>Pekerjaan Layak</h3>
-                    <p>Membuka pasar bagi talenta daerah untuk bersaing secara profesional.</p>
+                <div class="bg-white p-10 rounded-3xl w-full sm:w-[320px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-pink-50 group">
+                    <span class="inline-block bg-[#d14d72] text-white text-[11px] font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">SDG 8</span>
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-[#d14d72] transition">Pekerjaan Layak</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Membuka akses pasar yang lebih luas bagi talenta daerah untuk bersaing secara profesional.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="text-center" style="padding: 40px; color: #999;">
-        <p>© 2026 JALIN Project - UPN Jatim Assignment. <br> ilmu2.upnjatim.ac.id</p>
+    <footer class="py-12 text-center bg-white">
+        <p class="text-sm text-gray-400 font-medium leading-relaxed">
+            © 2026 JALIN Project - UPN Jatim Assignment. <br>
+            <span class="text-pink-300 hover:text-[#d14d72] cursor-pointer transition italic font-semibold">ilmu2.upnjatim.ac.id</span>
+        </p>
     </footer>
 
     <script>
@@ -144,22 +169,33 @@
             document.getElementById('search-location').value = city;
         }
 
-        // Logic login simulasi dari URL Params
-        const urlParams = new URLSearchParams(window.location.search);
-        const userName = urlParams.get('user');
-        if (userName) {
+        // LOGIC PERSISTENCE (Penting!)
+        function updateNavbar() {
+            // Ambil nama dari memori browser
+            const savedUser = localStorage.getItem('userJalin');
             const authArea = document.getElementById('auth-area');
-            authArea.innerHTML = `
-                <a href="#" class="nav-item">My Bookings</a>
-                <div class="nav-item dropdown user-logged">
-                    <span>👤 ${userName}</span>
-                    <div class="dropdown-content">
-                        <a href="dashboard.html">Profil Saya</a>
-                        <a href="index.html">Keluar (Logout)</a>
+            
+            if (savedUser) {
+                authArea.innerHTML = `
+                    <a href="#" class="hidden md:block text-sm font-semibold text-[#d14d72] hover:text-pink-400 transition">My Bookings</a>
+                    <div class="relative group cursor-pointer">
+                        <span class="bg-[#ffb7c5] px-5 py-2 rounded-full text-white font-bold text-xs uppercase tracking-widest shadow-sm">👤 ${savedUser.toUpperCase()}</span>
+                        <div class="absolute top-full right-0 mt-2 min-w-[180px] bg-white shadow-2xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[1100] border border-gray-100">
+                            <a href="dashboard.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-[#fff0f3] border-b border-gray-50">Profil Saya</a>
+                            <a href="#" onclick="logout()" class="block px-4 py-3 text-sm text-red-500 hover:bg-[#fff0f3] font-semibold">Keluar (Logout)</a>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
         }
+
+        function logout() {
+            localStorage.removeItem('userJalin'); // Hapus data login
+            window.location.href = 'index.html'; // Refresh halaman
+        }
+
+        // Jalankan fungsi update saat halaman dibuka
+        window.onload = updateNavbar;
     </script>
 </body>
 </html>

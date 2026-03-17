@@ -3,64 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Mitra | JALIN</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Profil Saya | JALIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #fffafb; }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+    </style>
 </head>
-<body class="bg-dash">
-    <div class="dash-wrapper">
-        <aside class="dash-sidebar">
-            <div class="logo">JALIN<span>.</span></div>
-            <nav class="side-menu">
-                <a href="#" class="active">📊 Dashboard</a>
-                <a href="#">📅 Jadwal Projek</a>
-                <a href="#">💰 Keuangan</a>
-                <hr>
-                <a href="index.html">🏠 Beranda Web</a>
-            </nav>
-        </aside>
+<body class="text-gray-800">
 
-        <main class="dash-content">
-            <header class="dash-header">
-                <h2>Selamat Datang, Mitra JALIN</h2>
-                <div class="badge-status">Aktif</div>
-            </header>
-
-            <div class="grid-3">
-                <div class="stat-box">
-                    <span>Income</span>
-                    <h3>Rp 15.000.000</h3>
-                </div>
-                <div class="stat-box">
-                    <span>Projek Selesai</span>
-                    <h3>24</h3>
-                </div>
-                <div class="stat-box">
-                    <span>Kontribusi SDG</span>
-                    <h3>High</h3>
+    <nav class="bg-white py-4 shadow-sm sticky top-0 z-50 border-b border-pink-50">
+        <div class="w-[85%] mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#d14d72] cursor-pointer" onclick="window.location.href='index.html'">
+                JALIN<span class="text-[#ffb7c5]">.</span>
+            </div>
+            <div class="flex items-center gap-6 text-sm font-semibold text-[#d14d72]">
+                <a href="index.html" class="hover:text-pink-400 transition">Beranda</a>
+                <a href="vendor.html" class="hover:text-pink-400 transition">Cari Vendor</a>
+                <div id="user-pill" class="flex items-center gap-2 bg-[#ffb7c5] px-4 py-2 rounded-full text-white shadow-md">
+                    <span class="text-xs">👤</span> <span id="nav-user-name">USER</span>
                 </div>
             </div>
+        </div>
+    </nav>
 
-            <section class="table-container">
-                <h3>Antrean Pekerjaan</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Klien</th>
-                            <th>Layanan</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dinda & Eko</td>
-                            <td>Catering UMKM</td>
-                            <td><span class="st st-waiting">Menunggu</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <main class="w-[85%] mx-auto py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <aside class="w-full lg:w-1/4 space-y-6">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl text-center border border-pink-50">
+                    <div class="w-24 h-24 bg-[#fff0f3] rounded-full mx-auto mb-4 flex items-center justify-center text-3xl shadow-inner border-2 border-white text-[#d14d72]">
+                        👤
+                    </div>
+                    <h2 id="sidebar-user-name" class="text-xl font-bold text-gray-800 italic">User</h2>
+                    <p class="text-xs text-pink-500 font-bold uppercase tracking-widest mt-1">Calon Pengantin</p>
+                    
+                    <hr class="my-6 border-pink-50">
+                    
+                    <div class="space-y-3 text-left">
+                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4 ml-1">Menu Profil</div>
+                        
+                        <a href="dashboard.html" class="block text-sm font-bold text-[#d14d72] bg-[#fff0f3] p-4 rounded-2xl transition shadow-sm border border-pink-100">
+                            Dashboard Akun
+                        </a>
+                        
+                        <a href="edit-profile.html" class="block text-sm font-medium text-gray-500 hover:text-[#d14d72] hover:bg-pink-50/50 p-4 rounded-2xl transition border border-transparent hover:border-pink-100">
+                            Edit Profil
+                        </a>
+                        
+                        <a href="#" onclick="logout()" class="block text-sm font-medium text-red-400 hover:bg-red-50 p-4 rounded-2xl transition mt-4">
+                            Keluar (Logout)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-[#d14d72] p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full group-hover:scale-150 transition duration-700"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg mb-2">Impact Score</h3>
+                        <p class="text-[10px] opacity-80 mb-4 uppercase tracking-widest">Kontribusi Sosial Anda</p>
+                        <div class="text-4xl font-bold mb-4">1,250 <span class="text-sm font-normal">pts</span></div>
+                        <div class="w-full bg-white/20 h-2 rounded-full overflow-hidden">
+                            <div class="bg-[#ffb7c5] w-3/4 h-full rounded-full"></div>
+                        </div>
+                        <p class="text-[9px] mt-4 opacity-70 italic leading-relaxed">*Poin ini didapat dari transaksi Anda yang memberdayakan UMKM lokal.</p>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="flex-1 space-y-8">
+                
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-pink-50 flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h1 class="text-2xl font-bold text-gray-800">Halo, <span id="welcome-user-name" class="italic">User</span>! 👋</h1>
+                        <p class="text-gray-500 text-sm mt-1">Hari bahagia Anda sedang kami siapkan dengan penuh cinta.</p>
+                    </div>
+                    <div class="flex gap-4 relative z-10">
+                        <div class="text-center bg-[#fffafb] px-6 py-4 rounded-[1.5rem] border border-pink-100 shadow-sm min-w-[100px]">
+                            <div class="text-2xl font-bold text-[#d14d72]">3</div>
+                            <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Bookings</div>
+                        </div>
+                        <div class="text-center bg-[#fffafb] px-6 py-4 rounded-[1.5rem] border border-pink-100 shadow-sm min-w-[100px]">
+                            <div class="text-2xl font-bold text-[#d14d72]">12</div>
+                            <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Wishlist</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-pink-50">
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="font-bold text-gray-800 tracking-widest uppercase text-xs">Pesanan Terbaru</h3>
+                        <a href="#" class="text-xs font-bold text-[#d14d72] hover:underline transition">Lihat Semua</a>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] border-b border-gray-50">
+                                    <th class="pb-5 pl-2">Vendor</th>
+                                    <th class="pb-5">Layanan</th>
+                                    <th class="pb-5">Tanggal</th>
+                                    <th class="pb-5">Status</th>
+                                    <th class="pb-5 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-50 last:border-0 group hover:bg-gray-50/50 transition">
+                                    <td class="py-6 pl-2 font-bold text-gray-700 text-xs">Catering Mbak Susi</td>
+                                    <td class="py-6 text-gray-500 text-xs">Catering UMKM (300 Pax)</td>
+                                    <td class="py-6 text-gray-500 text-xs">12 Mei 2026</td>
+                                    <td class="py-6">
+                                        <span class="bg-blue-50 text-blue-500 px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider">Proses</span>
+                                    </td>
+                                    <td class="py-6 text-center">
+                                        <button class="text-[#d14d72] font-bold text-xs hover:text-pink-400 transition">Detail</button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-50 last:border-0 group hover:bg-gray-50/50 transition">
+                                    <td class="py-6 pl-2 font-bold text-gray-700 text-xs">Art Project Mahasiswa</td>
+                                    <td class="py-6 text-gray-500 text-xs">Hantaran Kreatif</td>
+                                    <td class="py-6 text-gray-500 text-xs">15 Mei 2026</td>
+                                    <td class="py-6">
+                                        <span class="bg-green-50 text-green-500 px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider">Selesai</span>
+                                    </td>
+                                    <td class="py-6 text-center">
+                                        <button class="text-[#d14d72] font-bold text-xs hover:text-pink-400 transition">Detail</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-6 tracking-widest uppercase text-xs ml-4 text-xs">Rekomendasi Untuk Anda</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-5 rounded-[2rem] shadow-md flex items-center gap-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer border border-pink-50">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=150&q=80" class="w-20 h-20 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition duration-500" alt="decor">
+                            <div>
+                                <h4 class="font-bold text-gray-800 group-hover:text-[#d14d72] transition text-sm">Dekorasi Bunga Desa</h4>
+                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-wide text-[9px]">📍 Surabaya, Jatim</p>
+                                <div class="mt-2 text-[#ffb7c5] text-[10px]">★★★★★ <span class="text-gray-300 ml-1">(48)</span></div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-[2rem] shadow-md flex items-center gap-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer border border-pink-50">
+                            <img src="https://images.unsplash.com/photo-1486304828099-22160101da67?auto=format&fit=crop&w=150&q=80" class="w-20 h-20 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition duration-500" alt="mua">
+                            <div>
+                                <h4 class="font-bold text-gray-800 group-hover:text-[#d14d72] transition text-sm">MUA Mahasiswa Kreatif</h4>
+                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-wide text-[9px]">📍 Malang, Jatim</p>
+                                <div class="mt-2 text-[#ffb7c5] text-[10px]">★★★★☆ <span class="text-gray-300 ml-1">(32)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
-        </main>
-    </div>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center">
+        <p class="text-[10px] text-gray-300 uppercase tracking-[0.3em] font-bold">
+            © 2026 JALIN Project - UPN Jatim Assignment
+        </p>
+    </footer>
+
+    <script>
+        function loadDashboardData() {
+            // Ambil nama dari memori browser
+            const savedName = localStorage.getItem('userJalin');
+            
+            if (savedName) {
+                // Update Nama di Navbar
+                document.getElementById('nav-user-name').innerText = savedName.toUpperCase();
+                // Update Nama di Sidebar
+                document.getElementById('sidebar-user-name').innerText = savedName;
+                // Update Nama di Welcome Message
+                document.getElementById('welcome-user-name').innerText = savedName;
+            } else {
+                // Jika tidak ada data login, paksa ke halaman login
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            // Hapus data login dari browser
+            localStorage.removeItem('userJalin');
+            // Kembali ke beranda
+            window.location.href = 'index.html';
+        }
+
+        // Jalankan fungsi saat halaman dimuat
+        window.onload = loadDashboardData;
+    </script>
 </body>
 </html>
