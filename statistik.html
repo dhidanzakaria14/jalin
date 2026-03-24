@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik Mitra | JALIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #fffafb; }
+        .stat-card {
+            background-color: white;
+            border-left: 6px solid #ffb7c5;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(209, 77, 114, 0.1);
+        }
+        .active-card {
+            border-left-color: #d14d72 !important;
+            background-color: #fff0f3 !important;
+            box-shadow: 0 10px 15px -3px rgba(209, 77, 114, 0.1);
+        }
+        .chart-container {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-6 md:p-12 text-gray-800">
+
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Analitik Kemitraan</h1>
+                <p class="text-sm text-gray-400 mt-1 font-medium italic">Dashboard Pemantauan Dampak Sosial JALIN</p>
+            </div>
+            <button onclick="window.print()" class="px-5 py-2.5 bg-white border border-pink-100 text-[#d14d72] rounded-xl text-xs font-bold shadow-sm hover:bg-pink-50 transition uppercase tracking-widest">
+                🖨️ Cetak Laporan
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            
+            <div id="cardVendor" onclick="showChart('vendor')" class="stat-card p-10 rounded-[2.5rem] cursor-pointer active-card relative overflow-hidden group border border-pink-50">
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Total UMKM</span>
+                        <span class="text-green-500 text-xs font-bold bg-green-50 px-2 py-1 rounded-lg">↑ 12% bln ini</span>
+                    </div>
+                    <h2 class="text-6xl font-black text-[#d14d72] mt-2">515</h2>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-4 opacity-70">Mitra Vendor Terverifikasi</p>
+                </div>
+            </div>
+
+            <div id="cardFreelance" onclick="showChart('freelance')" class="stat-card p-10 rounded-[2.5rem] cursor-pointer relative overflow-hidden group border border-pink-50">
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Total Mahasiswa</span>
+                        <span class="text-green-500 text-xs font-bold bg-green-50 px-2 py-1 rounded-lg">↑ 8% bln ini</span>
+                    </div>
+                    <h2 class="text-6xl font-black text-[#d14d72] mt-2">245</h2>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-4 opacity-70">Freelancer Aktif</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl shadow-pink-100/20 border border-pink-50 chart-container">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800">Tren Pertumbuhan <span id="chartTitle" class="text-[#d14d72]">Mitra UMKM</span></h3>
+                    <p class="text-xs text-gray-400 mt-1 font-medium">Periode: Januari 2023 - Desember 2024</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2">
+                        <div id="legendColor" class="w-3 h-3 rounded-full bg-[#d14d72]"></div>
+                        <span class="text-[10px] font-bold text-gray-500 uppercase">Pertumbuhan Akumulatif</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative h-[350px] md:h-[450px]">
+                <canvas id="jalinChart"></canvas>
+            </div>
+        </div>
+
+        <p class="text-center mt-12 text-[10px] text-gray-300 font-bold uppercase tracking-[0.5em]">JALIN Dashboard System • 2026</p>
+    </div>
+
+    <script>
+        const labelsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+        const dataVendor = [350, 365, 390, 385, 410, 430, 450, 445, 470, 490, 500, 515];
+        const dataFreelance = [120, 130, 140, 160, 190, 210, 205, 195, 210, 220, 230, 245];
+
+        const ctx = document.getElementById('jalinChart').getContext('2d');
+        let currentChart;
+
+        function showChart(type) {
+            document.querySelectorAll('.stat-card').forEach(card => card.classList.remove('active-card'));
+            
+            let datasets = [];
+            let titleText = "";
+            let color = "#d14d72"; 
+            
+            if (type === 'vendor') {
+                document.getElementById('cardVendor').classList.add('active-card');
+                document.getElementById('legendColor').style.backgroundColor = "#d14d72";
+                titleText = "Mitra UMKM";
+                color = "#d14d72";
+                datasets = [{
+                    data: dataVendor,
+                    borderColor: color,
+                    backgroundColor: (context) => {
+                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                        gradient.addColorStop(0, 'rgba(209, 77, 114, 0.4)');
+                        gradient.addColorStop(1, 'rgba(209, 77, 114, 0.01)');
+                        return gradient;
+                    },
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: 'white',
+                    pointBorderWidth: 3
+                }];
+            } else {
+                document.getElementById('cardFreelance').classList.add('active-card');
+                document.getElementById('legendColor').style.backgroundColor = "#ffb7c5";
+                titleText = "Mahasiswa Freelancer";
+                color = "#ffb7c5";
+                datasets = [{
+                    data: dataFreelance,
+                    borderColor: color,
+                    backgroundColor: (context) => {
+                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                        gradient.addColorStop(0, 'rgba(255, 183, 197, 0.4)');
+                        gradient.addColorStop(1, 'rgba(255, 183, 197, 0.01)');
+                        return gradient;
+                    },
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: 'white',
+                    pointBorderWidth: 3
+                }];
+            }
+
+            document.getElementById('chartTitle').innerText = titleText;
+            document.getElementById('chartTitle').style.color = color;
+
+            if (currentChart) currentChart.destroy();
+
+            currentChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: labelsArr, datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#210e12',
+                            padding: 15,
+                            cornerRadius: 15,
+                            titleFont: { size: 12, family: 'Poppins' },
+                            bodyFont: { size: 14, weight: 'bold', family: 'Poppins' },
+                            callbacks: {
+                                label: function(context) { return ` ${context.parsed.y} Mitra Aktif`; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { font: { size: 10, weight: 'bold' }, color: '#cbd5e0' } },
+                        y: { 
+                            grid: { color: 'rgba(209, 77, 114, 0.05)' }, 
+                            ticks: { font: { size: 10 }, color: '#cbd5e0' } 
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = () => showChart('vendor');
+    </script>
+</body>
+</html>
