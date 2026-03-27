@@ -118,7 +118,11 @@
     </div>
 
     <script>
+        let currentSelectedRole = "";
+
         function selectRole(role) {
+            currentSelectedRole = role; 
+            
             document.querySelectorAll('[id^="card"]').forEach(card => {
                 card.classList.remove('role-card-selected');
                 card.querySelector('.absolute.top-4.right-4 div').style.opacity = '0';
@@ -136,18 +140,23 @@
             window.scrollTo({top: y, behavior: 'smooth'});
         }
 
-        // --- REVISI UTAMA DI SINI ---
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Ambil Nama Depan
             const name = document.getElementById('firstName').value;
             
-            // Simpan ke Memori Browser
+            // SIMPAN DATA KE MEMORI BROWSER
             localStorage.setItem('userJalin', name);
+            localStorage.setItem('userRole', currentSelectedRole); 
             
-            // Langsung ke Beranda
-            window.location.href = 'index.html';
+            // LOGIKA PENGALIHAN HALAMAN
+            if (currentSelectedRole === 'Vendor' || currentSelectedRole === 'Freelance') {
+                // Jika Vendor atau Mahasiswa, langsung masuk ke Dashboard Bisnis
+                window.location.href = 'dashboard-vendor.html';
+            } else {
+                // Jika Pengantin, masuk ke Beranda utama
+                window.location.href = 'index.html';
+            }
         });
     </script>
 </body>

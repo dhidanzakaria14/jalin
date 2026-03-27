@@ -4,193 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JALIN | Katalog Vendor</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link rel="stylesheet" href="vendor.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #fffafb; color: #333; }
+        
+        /* Layout Grid */
+        .vendor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
 
-    <nav class="main-nav">
-        <div class="container nav-flex">
-            <div class="nav-left">
-                <div class="logo" onclick="window.location.href='index.html'">JALIN<span>.</span></div>
-                <div class="nav-item promo-tag">📍 Katalog Vendor</div>
+        /* Card Style */
+        .vendor-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f5f5f5;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .vendor-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 30px rgba(209, 77, 114, 0.12);
+        }
+
+        .vendor-img {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .vendor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .vendor-card:hover .vendor-img img {
+            transform: scale(1.1);
+        }
+
+        .price-tag { color: #d14d72; font-weight: 700; font-size: 18px; }
+        .price-tag span { font-size: 11px; color: #aaa; font-weight: 400; }
+
+        /* Modal Animation */
+        #vendorModal.hidden { display: none; }
+        #vendorModal:not(.hidden) { display: flex; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <nav class="sticky top-0 z-[1000] bg-white/90 backdrop-blur-md py-4 shadow-sm border-b border-pink-50">
+        <div class="w-[85%] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <div class="text-2xl font-bold text-[#d14d72] cursor-pointer" onclick="window.location.href='index.html'">
+                    JALIN<span class="text-[#ffb7c5]">.</span>
+                </div>
+                <div class="hidden md:block text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-4 py-1.5 rounded-full border border-gray-100">
+                    📍 Katalog Vendor
+                </div>
             </div>
-            <div class="nav-right">
-                <a href="index.html" class="nav-item">Home</a>
-                <a href="vendor.html" class="nav-item">Cari Vendor</a>
-                <a href="login.html" class="btn-log">Log In</a>
-                <a href="#" class="btn-reg">Register</a>
+
+            <div id="auth-area" class="flex items-center gap-6 text-sm font-semibold">
+                <a href="index.html" class="text-gray-500 hover:text-[#d14d72] transition">Home</a>
+                <a href="vendor.html" class="text-[#d14d72] border-b-2 border-[#d14d72] pb-1">Cari Vendor</a>
+                <div id="user-nav-container">
+                    <a href="login.html" class="bg-[#fff0f3] text-[#d14d72] px-6 py-2.5 rounded-xl hover:bg-pink-100 transition shadow-sm border border-pink-100">Log In</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="section-padding" style="background: #fffafb; text-align: center; padding-top: 50px;">
-        <div class="container">
-            <p class="subtitle">Our Partners</p>
-            <h2 class="section-title">Wujudkan Impian & Berbagi Dampak</h2>
+    <header class="py-20 text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-pink-50 rounded-full blur-3xl opacity-50 -mr-32 -mt-32"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <p class="text-[#ffb7c5] font-bold uppercase tracking-[0.4em] text-[10px] mb-4">Official Partners</p>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">Temukan Vendor <br><span class="text-[#d14d72]">Impian Anda</span></h2>
+            <div class="w-24 h-1.5 bg-[#ffb7c5] mx-auto mt-8 rounded-full"></div>
         </div>
     </header>
 
-    <section class="container" style="padding-bottom: 80px;">
+    <section class="container mx-auto px-4 w-[85%] pb-32">
         <div class="vendor-grid">
             
             <div class="vendor-card">
                 <div class="vendor-img">
-                    <img src="c:\Users\Dhidan\Downloads\Image\image vendor\download.jfif" alt="MUA">
-                    <span class="badge b-4">MAHASISWA</span>
+                    <img src="https://images.unsplash.com/photo-1486304828099-22160101da67?auto=format&fit=crop&w=600&q=80" alt="MUA">
                 </div>
-                <div class="card-body">
-                    <p class="cat-label">MUA Freelance</p>
-                    <h3>Glow Academy</h3>
-                    <p class="loc">📍 Jakarta Selatan</p>
-                    <div class="price-box">
+                <div class="p-8">
+                    <p class="text-[10px] font-bold text-[#ffcad4] uppercase tracking-widest mb-1">MUA Freelance</p>
+                    <h3 class="text-xl font-bold text-gray-800">Glow Academy</h3>
+                    <p class="text-xs text-gray-400 mt-1">📍 Jakarta Selatan</p>
+                    <div class="flex justify-between items-center mt-8 pt-5 border-t border-gray-50">
                         <span class="price-tag">Rp 2.5jt</span>
-                        <button class="btn-detail">Lihat</button>
+                        <button onclick="openModal('Glow Academy', 'MUA Freelance', '📍 Jakarta Selatan', 'Rp 2.5jt', 'https://images.unsplash.com/photo-1486304828099-22160101da67?auto=format&fit=crop&w=800&q=80')" 
+                                class="bg-[#fff0f3] text-[#d14d72] px-5 py-2.5 rounded-xl text-xs font-bold border border-pink-100 hover:bg-[#d14d72] hover:text-white transition shadow-sm">
+                            Lihat
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="vendor-card">
                 <div class="vendor-img">
-                    <img src="c:\Users\Dhidan\Downloads\Image\image vendor\dekor 1.jfif" alt="Dekor">
-                    <span class="badge b-8">UMKM</span>
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Dekor">
                 </div>
-                <div class="card-body">
-                    <p class="cat-label">Dekorasi</p>
-                    <h3>Rustic Bamboo Seni</h3>
-                    <p class="loc">📍 Yogyakarta</p>
-                    <div class="price-box">
+                <div class="p-8">
+                    <p class="text-[10px] font-bold text-[#ffcad4] uppercase tracking-widest mb-1">Dekorasi</p>
+                    <h3 class="text-xl font-bold text-gray-800">Rustic Bamboo Seni</h3>
+                    <p class="text-xs text-gray-400 mt-1">📍 Yogyakarta</p>
+                    <div class="flex justify-between items-center mt-8 pt-5 border-t border-gray-50">
                         <span class="price-tag">Rp 15jt</span>
-                        <button class="btn-detail">Lihat</button>
+                        <button onclick="openModal('Rustic Bamboo Seni', 'Dekorasi', '📍 Yogyakarta', 'Rp 15jt', 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80')" 
+                                class="bg-[#fff0f3] text-[#d14d72] px-5 py-2.5 rounded-xl text-xs font-bold border border-pink-100 hover:bg-[#d14d72] hover:text-white transition shadow-sm">
+                            Lihat
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="vendor-card">
                 <div class="vendor-img">
-                    <img src="c:\Users\Dhidan\Downloads\Image\image vendor\Fotografi 1.jfif" alt="Foto">
-                    <span class="badge b-4">MAHASISWA</span>
+                    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=600&q=80" alt="Foto">
                 </div>
-                <div class="card-body">
-                    <p class="cat-label">Fotografi</p>
-                    <h3>Lensa Muda Visual</h3>
-                    <p class="loc">📍 Surabaya</p>
-                    <div class="price-box">
+                <div class="p-8">
+                    <p class="text-[10px] font-bold text-[#ffcad4] uppercase tracking-widest mb-1">Fotografi</p>
+                    <h3 class="text-xl font-bold text-gray-800">Lensa Muda Visual</h3>
+                    <p class="text-xs text-gray-400 mt-1">📍 Surabaya</p>
+                    <div class="flex justify-between items-center mt-8 pt-5 border-t border-gray-50">
                         <span class="price-tag">Rp 4.5jt</span>
-                        <button class="btn-detail">Lihat</button>
+                        <button onclick="openModal('Lensa Muda Visual', 'Fotografi', '📍 Surabaya', 'Rp 4.5jt', 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=800&q=80')" 
+                                class="bg-[#fff0f3] text-[#d14d72] px-5 py-2.5 rounded-xl text-xs font-bold border border-pink-100 hover:bg-[#d14d72] hover:text-white transition shadow-sm">
+                            Lihat
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="vendor-card">
                 <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/food,buffet" alt="Catering">
-                    <span class="badge b-8">UMKM</span>
+                    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80" alt="Catering">
                 </div>
-                <div class="card-body">
-                    <p class="cat-label">Catering</p>
-                    <h3>Dapur Berkah Lokal</h3>
-                    <p class="loc">📍 Bandung</p>
-                    <div class="price-box">
+                <div class="p-8">
+                    <p class="text-[10px] font-bold text-[#ffcad4] uppercase tracking-widest mb-1">Catering</p>
+                    <h3 class="text-xl font-bold text-gray-800">Dapur Berkah Lokal</h3>
+                    <p class="text-xs text-gray-400 mt-1">📍 Bandung</p>
+                    <div class="flex justify-between items-center mt-8 pt-5 border-t border-gray-50">
                         <span class="price-tag">Rp 85rb<span>/pax</span></span>
-                        <button class="btn-detail">Lihat</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/garden,wedding" alt="Venue">
-                    <span class="badge b-10">LOKAL</span>
-                </div>
-                <div class="card-body">
-                    <p class="cat-label">Venue</p>
-                    <h3>Taman Pinus Heritage</h3>
-                    <p class="loc">📍 Bogor</p>
-                    <div class="price-box">
-                        <span class="price-tag">Rp 20jt</span>
-                        <button class="btn-detail">Lihat</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/gift,box" alt="Hantaran">
-                    <span class="badge b-4">UMKM</span>
-                </div>
-                <div class="card-body">
-                    <p class="cat-label">Hantaran</p>
-                    <h3>Hias Mahar Kreatif</h3>
-                    <p class="loc">📍 Malang</p>
-                    <div class="price-box">
-                        <span class="price-tag">Rp 250rb<span>/box</span></span>
-                        <button class="btn-detail">Lihat</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/makeup,woman" alt="MUA">
-                    <span class="badge b-8">UMKM</span>
-                </div>
-                <div class="card-body">
-                    <p class="cat-label">MUA Tradisional</p>
-                    <h3>Ayu Lestari MUA</h3>
-                    <p class="loc">📍 Bandung</p>
-                    <div class="price-box">
-                        <span class="price-tag">Rp 5.5jt</span>
-                        <button class="btn-detail">Lihat</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/flower,decoration" alt="Dekor">
-                    <span class="badge b-4">MAHASISWA</span>
-                </div>
-                <div class="card-body">
-                    <p class="cat-label">Dekorasi Minimalis</p>
-                    <h3>Minimalist Dream</h3>
-                    <p class="loc">📍 Tangerang</p>
-                    <div class="price-box">
-                        <span class="price-tag">Rp 7.5jt</span>
-                        <button class="btn-detail">Lihat</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/cuisine" alt="Catering">
-                    <span class="badge b-8">UMKM</span>
-                </div>
-                <div class="card-body">
-                    <p class="cat-label">Catering Sehat</p>
-                    <h3>Healthy Feast</h3>
-                    <p class="loc">📍 Jakarta</p>
-                    <div class="price-box">
-                        <span class="price-tag">Rp 110rb<span>/pax</span></span>
-                        <button class="btn-detail">Lihat</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vendor-card">
-                <div class="vendor-img">
-                    <img src="https://loremflickr.com/500/350/photography,couple" alt="Foto">
-                    <span class="badge b-10">LOKAL</span>
-                </div>
-                <div class="card-body">
-                    <p class="cat-label">Cinema & Video</p>
-                    <h3>Momen Abadi Pro</h3>
-                    <p class="loc">📍 Bali</p>
-                    <div class="price-box">
-                        <span class="price-tag">Rp 12jt</span>
-                        <button class="btn-detail">Lihat</button>
+                        <button onclick="openModal('Dapur Berkah Lokal', 'Catering', '📍 Bandung', 'Rp 85rb/pax', 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80')" 
+                                class="bg-[#fff0f3] text-[#d14d72] px-5 py-2.5 rounded-xl text-xs font-bold border border-pink-100 hover:bg-[#d14d72] hover:text-white transition shadow-sm">
+                            Lihat
+                        </button>
                     </div>
                 </div>
             </div>
@@ -198,5 +172,84 @@
         </div>
     </section>
 
+    <div id="vendorModal" class="fixed inset-0 z-[2000] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="bg-white w-full max-w-4xl rounded-[3rem] relative z-10 overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]">
+            <div class="md:w-1/2 h-64 md:h-auto overflow-hidden">
+                <img id="modalImg" src="" class="w-full h-full object-cover">
+            </div>
+            <div class="md:w-1/2 p-10 md:p-14 overflow-y-auto">
+                <button onclick="closeModal()" class="absolute top-8 right-10 text-3xl text-gray-300 hover:text-[#d14d72]">&times;</button>
+                <p id="modalCat" class="text-[10px] font-bold text-[#ffcad4] uppercase tracking-widest mb-2"></p>
+                <h2 id="modalTitle" class="text-3xl font-bold text-gray-800 mb-2 leading-tight"></h2>
+                <p id="modalLoc" class="text-sm text-gray-400 mb-8 font-medium"></p>
+                <div class="space-y-4 mb-10">
+                    <h4 class="font-bold text-gray-700 text-xs uppercase tracking-widest">Tentang Vendor:</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed italic">
+                        "Setiap karya kami adalah bentuk kontribusi nyata terhadap pemberdayaan komunitas lokal. Dengan memilih kami, Anda turut mendukung misi sosial JALIN."
+                    </p>
+                </div>
+                <div class="flex items-center justify-between pt-8 border-t border-gray-100">
+                    <div>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Mulai Dari</p>
+                        <p id="modalPrice" class="text-2xl font-bold text-[#d14d72]"></p>
+                    </div>
+                    <button onclick="alert('Mengarahkan ke WhatsApp Vendor JALIN...')" class="bg-[#d14d72] text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-pink-100 hover:bg-[#b03d5d] transition transform active:scale-95 text-sm">
+                        Booking Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 text-center border-t border-pink-50">
+        <p class="text-[10px] text-gray-300 uppercase tracking-[0.5em] font-bold">
+            © 2026 JALIN Project - UPN Jatim Assignment
+        </p>
+    </footer>
+
+    <script>
+        // SINKRONISASI NAMA USER (DHIDAN)
+        window.onload = function() {
+            const savedUser = localStorage.getItem('userJalin');
+            const container = document.getElementById('user-nav-container');
+            
+            if (savedUser && container) {
+                container.innerHTML = `
+                    <div class="relative group cursor-pointer">
+                        <span class="bg-[#ffb7c5] px-6 py-2.5 rounded-full text-white font-bold text-xs uppercase tracking-widest shadow-md flex items-center gap-2">
+                            👤 ${savedUser.toUpperCase()}
+                        </span>
+                        <div class="absolute top-full right-0 mt-3 min-w-[200px] bg-white shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[1100] border border-gray-100 overflow-hidden">
+                            <a href="dashboard.html" class="block px-6 py-4 text-sm text-gray-700 hover:bg-pink-50/50 border-b border-gray-50 font-medium">Profil Saya</a>
+                            <a href="#" onclick="logout()" class="block px-6 py-4 text-sm text-red-500 hover:bg-red-50 font-bold">Keluar (Logout)</a>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        function logout() {
+            localStorage.removeItem('userJalin');
+            window.location.reload();
+        }
+
+        // LOGIKA MODAL DETAIL
+        function openModal(title, cat, loc, price, img) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalCat').innerText = cat;
+            document.getElementById('modalLoc').innerText = loc;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalImg').src = img;
+            
+            document.getElementById('vendorModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Stop scroll
+        }
+
+        function closeModal() {
+            document.getElementById('vendorModal').classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Re-enable scroll
+        }
+    </script>
 </body>
 </html>

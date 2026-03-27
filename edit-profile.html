@@ -17,7 +17,7 @@
             <div class="text-2xl font-bold text-[#d14d72] cursor-pointer" onclick="window.location.href='index.html'">
                 JALIN<span class="text-[#ffb7c5]">.</span>
             </div>
-            <a href="dashboard.html" class="text-sm font-bold text-[#d14d72] hover:underline">← Kembali ke Dashboard</a>
+            <a href="#" onclick="goBack()" class="text-sm font-bold text-[#d14d72] hover:underline">← Kembali ke Dashboard</a>
         </div>
     </nav>
 
@@ -49,26 +49,28 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-1.5">
                             <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Nama Lengkap</label>
-                            <input type="text" value="Dhidan" placeholder="Nama Anda" class="w-full px-5 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition bg-gray-50/50">
+                            <input type="text" id="inputName" placeholder="Nama Anda" class="w-full px-5 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition bg-gray-50/50">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Email</label>
-                            <input type="email" value="dhidan@email.com" readonly class="w-full px-5 py-3 rounded-xl border border-gray-100 outline-none bg-gray-100 text-gray-400 cursor-not-allowed">
+                            <input type="email" id="inputEmail" readonly class="w-full px-5 py-3 rounded-xl border border-gray-100 outline-none bg-gray-100 text-gray-400 cursor-not-allowed">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Nomor Telepon (WhatsApp)</label>
                             <input type="tel" placeholder="0812xxxxxxx" class="w-full px-5 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition bg-gray-50/50">
                         </div>
                         <div class="space-y-1.5">
-                            <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Status</label>
-                            <select disabled class="w-full px-5 py-3 rounded-xl border border-gray-100 bg-gray-100 text-gray-400 cursor-not-allowed appearance-none">
-                                <option>Calon Pengantin</option>
+                            <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Status Peran</label>
+                            <select id="inputRole" disabled class="w-full px-5 py-3 rounded-xl border border-gray-100 bg-gray-100 text-gray-400 cursor-not-allowed appearance-none font-bold">
+                                <option value="Pengantin">Calon Pengantin</option>
+                                <option value="Vendor">Vendor UMKM</option>
+                                <option value="Freelance">Mahasiswa</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="space-y-1.5">
-                        <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Alamat Lokasi Pernikahan</label>
+                        <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Alamat / Lokasi Operasional</label>
                         <textarea rows="3" placeholder="Jl. Raya UPN Jatim No. 1..." class="w-full px-5 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffcad4] transition bg-gray-50/50 resize-none"></textarea>
                     </div>
 
@@ -78,7 +80,7 @@
                         <button type="submit" class="flex-1 bg-[#d14d72] text-white py-4 rounded-2xl font-bold shadow-lg shadow-pink-100 hover:bg-[#b03d5d] transition transform active:scale-95 uppercase tracking-widest text-sm">
                             Simpan Perubahan
                         </button>
-                        <button type="button" onclick="window.location.href='dashboard.html'" class="flex-1 bg-white text-gray-400 py-4 rounded-2xl font-bold border border-gray-100 hover:bg-gray-50 transition uppercase tracking-widest text-sm">
+                        <button type="button" onclick="goBack()" class="flex-1 bg-white text-gray-400 py-4 rounded-2xl font-bold border border-gray-100 hover:bg-gray-50 transition uppercase tracking-widest text-sm">
                             Batal
                         </button>
                     </div>
@@ -86,11 +88,36 @@
                 </form>
             </div>
             
-            <p class="text-center mt-8 text-xs text-gray-400">Terakhir diperbarui: 18 Maret 2026</p>
+            <p class="text-center mt-8 text-xs text-gray-400">Terakhir diperbarui: 25 Maret 2026</p>
         </div>
     </main>
 
     <script>
+        // Load Data saat halaman dibuka
+        window.onload = function() {
+            const savedName = localStorage.getItem('userJalin');
+            const savedRole = localStorage.getItem('userRole');
+
+            if (savedName) {
+                document.getElementById('inputName').value = savedName;
+                document.getElementById('inputEmail').value = savedName.toLowerCase().replace(/\s/g, '') + "@email.com";
+            }
+
+            if (savedRole) {
+                document.getElementById('inputRole').value = savedRole;
+            }
+        };
+
+        // Fungsi kembali ke dashboard yang tepat
+        function goBack() {
+            const savedRole = localStorage.getItem('userRole');
+            if (savedRole === 'Vendor' || savedRole === 'Freelance') {
+                window.location.href = 'dashboard-vendor.html';
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        }
+
         // Fungsi pratinjau foto profil
         function previewFile() {
             const preview = document.getElementById('previewImg');
@@ -112,8 +139,13 @@
         // Simulasi simpan data
         document.getElementById('editProfileForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const newName = document.getElementById('inputName').value;
+            
+            // Update nama di localStorage
+            localStorage.setItem('userJalin', newName);
+            
             alert('Perubahan profil berhasil disimpan!');
-            window.location.href = 'dashboard.html';
+            goBack(); // Kembali ke dashboard yang sesuai
         });
     </script>
 </body>
