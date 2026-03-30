@@ -26,8 +26,15 @@
             <form id="loginForm" class="space-y-5">
                 <div class="space-y-1.5">
                     <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Email</label>
-                    <input type="email" id="email" required placeholder="Gunakan kata 'vendor' di email untuk tes" 
+                    <input type="email" id="email" required placeholder="Gunakan kata 'vendor' untuk tes" 
                         class="w-full px-4 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition placeholder:text-gray-300 text-sm">
+                </div>
+
+                <div id="phoneArea" class="space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider ml-1">Nomor WhatsApp Vendor</label>
+                    <input type="number" id="phone" placeholder="Contoh: 628123456789" 
+                        class="w-full px-4 py-3 rounded-xl border border-gray-100 outline-none focus:ring-2 focus:ring-pink-100 focus:border-[#ffb7c5] transition placeholder:text-gray-300 text-sm">
+                    <p class="text-[9px] text-gray-400 ml-1 italic">*Wajib diisi jika Anda mendaftar sebagai Vendor.</p>
                 </div>
 
                 <div class="space-y-1.5">
@@ -63,29 +70,33 @@
     </div>
 
     <script>
-        // 1. Simulasi Login Manual PINTAR
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value.toLowerCase();
+            const phone = document.getElementById('phone').value;
             const userDisplay = email.split('@')[0]; 
             
-            // Simpan Nama
+            // Simpan Nama dan Nomor Telepon ke LocalStorage
             localStorage.setItem('userJalin', userDisplay);
+            localStorage.setItem('userPhoneJalin', phone); // <--- INI DISIMPAN
             
-            // LOGIKA DETEKSI ROLE OTOMATIS
             if (email.includes('vendor')) {
                 localStorage.setItem('userRole', 'Vendor');
-                window.location.href = 'dashboard-vendor.html'; // Pindah ke Dashboard Bisnis
+                // Beri peringatan jika vendor tidak isi nomor HP
+                if(!phone) {
+                    alert("Vendor wajib mengisi nomor WhatsApp untuk katalog!");
+                    return;
+                }
+                window.location.href = 'dashboard-vendor.html';
             } else if (email.includes('student') || email.includes('mahasiswa')) {
                 localStorage.setItem('userRole', 'Freelance');
-                window.location.href = 'dashboard-vendor.html'; // Pindah ke Dashboard Bisnis
+                window.location.href = 'dashboard-vendor.html';
             } else {
                 localStorage.setItem('userRole', 'Pengantin');
-                window.location.href = 'index.html'; // Pindah ke Beranda
+                window.location.href = 'index.html';
             }
         });
 
-        // 2. Simulasi Login Google
         function loginGoogleSimulasi(event) {
             const btn = event.currentTarget;
             btn.innerHTML = `<span class="text-xs italic">Menghubungkan...</span>`;
@@ -93,7 +104,8 @@
             setTimeout(() => {
                 const userGoogle = "DHIDAN"; 
                 localStorage.setItem('userJalin', userGoogle);
-                localStorage.setItem('userRole', 'Pengantin'); // Default Google sebagai Pengantin
+                localStorage.setItem('userPhoneJalin', '628123456789'); // Dummy phone untuk Google Login
+                localStorage.setItem('userRole', 'Pengantin');
                 window.location.href = 'index.html';
             }, 1000); 
         }
