@@ -1,17 +1,13 @@
 <?php
-include 'koneksi.php'; // Memanggil file koneksi tadi
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "db_jalin"; // Pastikan nama database di phpMyAdmin sama persis
 
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    
-    // Query SQL untuk memasukkan data
-    $sql = "INSERT INTO users (email, no_whatsapp, role) VALUES ('$email', '$phone', 'Vendor')";
-    
-    if (mysqli_query($conn, $sql)) {
-        header("Location: dashboard-vendor.html");
-    } else {
-        echo "Error: " . mysqli_error($conn);
-    }
+$conn = mysqli_connect($host, $user, $pass, $db);
+
+// Cek koneksi agar tidak bingung kalau error
+if (!$conn) {
+    die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
 ?>
