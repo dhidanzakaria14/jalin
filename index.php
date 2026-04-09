@@ -1,0 +1,188 @@
+<?php
+include 'koneksi.php';
+session_start();
+
+// Mengambil angka statistik riil dari database
+// 1. Hitung Vendor (Users dengan role Vendor)
+$sqlVendor = mysqli_query($conn, "SELECT COUNT(*) as total FROM users WHERE role = 'Vendor'");
+$countVendor = mysqli_fetch_assoc($sqlVendor)['total'];
+
+// 2. Hitung Freelance (Users dengan role Freelance)
+$sqlFreelance = mysqli_query($conn, "SELECT COUNT(*) as total FROM users WHERE role = 'Freelance'");
+$countFreelance = mysqli_fetch_assoc($sqlFreelance)['total'];
+?>
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JALIN | Wedding & Empowerment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-zoom { transition: transform 20s ease-in-out; }
+        .hero-zoom:hover { transform: scale(1.1); }
+        .stat-card { transition: all 0.3s ease; border-left: 6px solid #ffb7c5; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .active-stat { border-left-color: #d14d72 !important; background-color: #fff0f3 !important; }
+    </style>
+</head>
+<body class="bg-white overflow-x-hidden">
+
+    <nav class="sticky top-0 z-[1000] bg-white py-3 shadow-sm border-b border-gray-50">
+        <div class="w-[85%] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-5 md:gap-8">
+                <div class="text-2xl font-bold text-[#d14d72] cursor-pointer" onclick="window.location.href='index.php'">
+                    JALIN<span class="text-[#ffb7c5]">.</span>
+                </div>
+                <div class="relative group hidden md:block">
+                    <span id="current-location" class="text-sm font-semibold text-[#d14d72] cursor-pointer hover:text-pink-400 transition">📍 Pilih Daerah</span>
+                    <div class="absolute top-full left-0 mt-2 min-w-[170px] bg-white shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 border border-gray-100">
+                        <div class="p-3 text-[11px] font-bold text-[#ffb7c5] uppercase border-b border-gray-100">Daerah Populer</div>
+                        <a href="#" onclick="changeLocation('Jakarta')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3] transition">Jakarta</a>
+                        <a href="#" onclick="changeLocation('Surabaya')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#fff0f3] transition">Surabaya</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-5">
+                <a href="vendor.php" class="hidden md:block text-sm font-semibold text-[#d14d72] hover:text-pink-400 transition">Cari Vendor</a>
+                
+                <div id="auth-area" class="flex items-center gap-4">
+                    <?php if(isset($_SESSION['id_user'])): ?>
+                        <div class="relative group cursor-pointer">
+                            <span class="bg-[#ffb7c5] px-5 py-2 rounded-full text-white font-bold text-xs uppercase tracking-widest shadow-sm flex items-center gap-2">
+                                👤 <?= strtoupper($_SESSION['nama_user']) ?>
+                            </span>
+                            <div class="absolute top-full right-0 mt-2 min-w-[180px] bg-white shadow-2xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[1100] border border-gray-100">
+                                <a href="dashboard.php" class="block px-4 py-3 text-sm text-gray-700 hover:bg-[#fff0f3] border-b border-gray-50">Profil Saya</a>
+                                <a href="logout.php" class="block px-4 py-3 text-sm text-red-500 hover:bg-[#fff0f3] font-semibold">Keluar (Logout)</a>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <a href="login.php" class="bg-[#fff0f3] text-[#d14d72] px-4 py-2 rounded-md font-bold text-sm border border-[#ffcad4] hover:bg-pink-100 transition">Log In</a>
+                        <a href="register.php" class="bg-[#ffb7c5] text-white px-4 py-2 rounded-md font-bold text-sm border border-[#ffb7c5] hover:bg-[#f7aab9] transition">Register</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="h-[75vh] relative flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center hero-zoom" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1350&q=80');"></div>
+        </div>
+        <div class="w-[85%] mx-auto text-white relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Wujudkan Pernikahan Impian <br><span class="text-[#f7f2f3]"> & Berbagi Dampak Sosial</span></h1>
+            <p class="text-lg mb-8 max-w-[900px] opacity-90 font-light">Platform pertama yang menghubungkan momen bahagia Anda dengan pemberdayaan UMKM dan talenta muda lokal.</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="vendor.php" class="bg-[#f75a79] text-white px-8 py-3.5 rounded-md font-bold hover:bg-[#d14d72] transition duration-300 shadow-lg transform active:scale-95">Cari Vendor Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="search" class="w-[85%] mx-auto relative z-[50]">
+        <div class="bg-white p-6 rounded-xl shadow-2xl -mt-[60px] border border-gray-50">
+            <div class="flex flex-col md:flex-row gap-4 items-end">
+                <div class="flex-1 w-full space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider">📍 Lokasi Acara</label>
+                    <input type="text" id="search-location" placeholder="Masukkan Kota/Wilayah..." class="w-full p-2.5 border border-gray-100 rounded-md outline-none focus:ring-2 focus:ring-pink-100 transition">
+                </div>
+                <div class="flex-1 w-full space-y-1.5">
+                    <label class="text-[11px] font-bold text-[#d14d72] uppercase tracking-wider">🍱 Kategori Layanan</label>
+                    <select class="w-full p-2.5 border border-gray-100 rounded-md outline-none focus:ring-2 focus:ring-pink-100 transition bg-transparent">
+                        <option>Semua Layanan</option>
+                        <option>Catering UMKM</option>
+                        <option>MUA Freelance (Mahasiswa)</option>
+                    </select>
+                </div>
+                <button onclick="window.location.href='vendor.php'" class="w-full md:w-auto bg-[#d14d72] text-white px-8 py-3 rounded-md font-bold hover:bg-[#b03d5d] transition shadow-md">Cari Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="tentang-kami" class="py-24">
+        <div class="w-[85%] mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="flex-[2]">
+                    <p class="text-[#210e12] text-sm font-bold tracking-widest mb-2 uppercase italic">Mengenal JALIN</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">Menjalin Kebahagiaan, <br>Membangun Masa Depan.</h2>
+                    <p class="text-gray-600 leading-relaxed">Melalui JALIN, Anda berkontribusi pada pencapaian SDGs melalui pemberdayaan UMKM dan pembukaan lapangan kerja kreatif bagi mahasiswa.</p>
+                </div>
+                <div class="flex-1 w-full space-y-6">
+                    <div id="stat-vendor" onclick="updateChart('vendor')" class="stat-card active-stat p-8 rounded-2xl text-center shadow-sm cursor-pointer">
+                        <h4 class="text-4xl font-bold text-[#d14d72]"><?= $countVendor ?>+</h4>
+                        <p class="text-sm text-gray-500 font-bold uppercase mt-1">Mitra UMKM Aktif</p>
+                    </div>
+                    <div id="stat-freelance" onclick="updateChart('freelance')" class="stat-card bg-[#fff0f3] p-8 rounded-2xl text-center shadow-sm cursor-pointer">
+                        <h4 class="text-4xl font-bold text-[#d14d72]"><?= $countFreelance ?>+</h4>
+                        <p class="text-sm text-gray-500 font-bold uppercase mt-1">Mahasiswa Freelancer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-24 bg-white">
+        <div class="w-[85%] mx-auto">
+            <div class="bg-white p-8 rounded-3xl shadow-2xl border border-pink-50">
+                <h3 class="text-xl font-bold text-gray-800">Tren Pertumbuhan Mitra</h3>
+                <p class="text-sm text-gray-400 mb-8">Data pertumbuhan <span id="chart-label" class="text-[#d14d72] font-semibold">Vendor UMKM</span> 2026</p>
+                <div class="h-[300px] w-full">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center bg-white">
+        <p class="text-sm text-gray-400 font-medium leading-relaxed">© 2026 JALIN Project - UPN Jatim Assignment. <br><span class="text-pink-300 italic font-semibold">ilmu2.upnjatim.ac.id</span></p>
+    </footer>
+
+    <script>
+        function changeLocation(city) {
+            document.getElementById('current-location').innerText = "📍 " + city;
+            document.getElementById('search-location').value = city;
+        }
+
+        // LOGIKA GRAFIK (Statistik tetap pakai JS agar interaktif)
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        let growthChart;
+        const dataSets = {
+            vendor: [10, 25, 45, 80, 120, 200, 310, <?= $countVendor ?>], // Angka terakhir dari PHP
+            freelance: [5, 15, 30, 50, 75, 100, 150, <?= $countFreelance ?>]
+        };
+
+        function initChart(type) {
+            if (growthChart) growthChart.destroy();
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu'],
+                    datasets: [{
+                        label: type === 'vendor' ? 'Vendor' : 'Freelance',
+                        data: dataSets[type],
+                        borderColor: '#d14d72',
+                        backgroundColor: '#d14d7220',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function updateChart(type) {
+            document.getElementById('stat-vendor').classList.toggle('active-stat', type === 'vendor');
+            document.getElementById('stat-freelance').classList.toggle('active-stat', type === 'freelance');
+            document.getElementById('chart-label').innerText = type === 'vendor' ? 'Vendor UMKM' : 'Mahasiswa Freelancer';
+            initChart(type);
+        }
+
+        window.onload = function() { initChart('vendor'); };
+    </script>
+</body>
+</html>

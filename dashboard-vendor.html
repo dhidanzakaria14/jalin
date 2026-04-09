@@ -29,6 +29,8 @@
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Main Menu</p>
                     <div onclick="switchSection('dashboard', this)" class="sidebar-link sidebar-link-active flex items-center gap-4 p-4 text-sm text-[#d14d72] font-bold"><span>📊</span> Dashboard</div>
                     <div onclick="switchSection('layanan', this)" class="sidebar-link flex items-center gap-4 p-4 text-sm text-gray-500 hover:bg-pink-50"><span>🛍️</span> Kelola Layanan</div>
+                    <div onclick="switchSection('kategori', this)" class="sidebar-link flex items-center gap-4 p-4 text-sm text-gray-500 hover:bg-pink-50"><span>📁</span> Kelola Kategori</div>
+                    
                     <div onclick="switchSection('pesanan', this)" class="sidebar-link flex items-center gap-4 p-4 text-sm text-gray-500 hover:bg-pink-50"><span>📩</span> Pesanan Masuk</div>
                     <div onclick="switchSection('ulasan', this)" class="sidebar-link flex items-center gap-4 p-4 text-sm text-gray-500 hover:bg-pink-50"><span>⭐️</span> Ulasan Klien</div>
                     <div class="pt-12">
@@ -47,7 +49,7 @@
                     <p class="text-[10px] text-pink-400 font-bold uppercase tracking-widest mt-1">Vendor JALIN Partner</p>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="text-right hidden sm:block leading-tight">
+                    <div class="text-right hidden sm:block leading-tight text-left">
                         <p id="nav-user" class="text-sm font-bold text-gray-800 uppercase tracking-tighter">DHIDANVENDOR</p>
                         <p class="text-[9px] text-green-500 font-bold uppercase">Online</p>
                     </div>
@@ -59,19 +61,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     <div class="bg-white p-8 rounded-[2rem] border border-pink-50 shadow-sm">
                         <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Total Pendapatan</p>
-                        <h3 id="stat-pendapatan" class="text-2xl font-bold mt-2">Rp 0</h3>
+                        <h3 id="stat-pendapatan" class="text-2xl font-bold mt-2 text-left">Rp 0</h3>
                     </div>
                     <div class="bg-white p-8 rounded-[2rem] border border-pink-50 shadow-sm">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Pesanan Baru</p>
-                        <h3 id="stat-katalog" class="text-2xl font-bold mt-2">0</h3>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Katalog Layanan</p>
+                        <h3 id="stat-katalog" class="text-2xl font-bold mt-2 text-left">0</h3>
                     </div>
-                    <div class="bg-white p-8 rounded-[2rem] border border-pink-50 shadow-sm text-left text-left">
+                    <div class="bg-white p-8 rounded-[2rem] border border-pink-50 shadow-sm">
                         <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Rating Toko</p>
                         <h3 class="text-2xl font-bold mt-2 text-left">4.9/5.0 <span class="text-yellow-400 text-sm">★</span></h3>
                     </div>
-                    <div class="bg-[#d14d72] p-8 rounded-[2rem] shadow-xl text-white text-left relative overflow-hidden">
+                    <div class="bg-[#d14d72] p-8 rounded-[2rem] shadow-xl text-white relative overflow-hidden">
                         <p class="text-white/70 text-[10px] font-bold uppercase tracking-wider">Impact Score</p>
-                        <h3 class="text-2xl font-bold mt-2">850 pts</h3>
+                        <h3 class="text-2xl font-bold mt-2 text-left">850 pts</h3>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -80,26 +82,44 @@
                         <div class="h-[350px]"><canvas id="vendorChart"></canvas></div>
                     </div>
                     <div class="bg-white p-10 rounded-[3rem] shadow-xl border border-pink-50">
-                        <h3 class="font-bold text-gray-800 mb-6 text-sm italic uppercase tracking-widest text-left text-left">Log Aktivitas</h3>
+                        <h3 class="font-bold text-gray-800 mb-6 text-sm italic uppercase tracking-widest text-left">Log Aktivitas</h3>
                         <p class="text-xs text-gray-400 text-left">Belum ada aktivitas terbaru.</p>
                     </div>
                 </div>
             </section>
 
-            <section id="section-layanan" class="content-section text-left">
-                <div class="flex justify-between items-center mb-10 text-left text-left">
+            <section id="section-kategori" class="content-section text-left">
+                <div class="flex justify-between items-center mb-10 text-left">
                     <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Master Kategori</h2>
+                        <p class="text-sm text-gray-400 mt-1">Kelola kategori untuk klasifikasi layanan Anda.</p>
+                    </div>
+                    <button onclick="openModalKat()" class="bg-[#d14d72] text-white px-8 py-4 rounded-2xl text-xs font-bold uppercase shadow-lg">+ Tambah Kategori</button>
+                </div>
+                <div class="bg-white rounded-[2.5rem] border border-pink-50 overflow-hidden shadow-xl">
+                    <table class="w-full text-left">
+                        <thead class="bg-pink-50/30 text-[10px] font-bold uppercase text-gray-400">
+                            <tr><th class="p-8">Nama Kategori</th><th class="p-8 text-center">Aksi</th></tr>
+                        </thead>
+                        <tbody id="table-kategori" class="text-xs"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="section-layanan" class="content-section text-left">
+                <div class="flex justify-between items-center mb-10 text-left">
+                    <div class="text-left">
                         <h2 class="text-2xl font-bold text-gray-800">Katalog Layanan</h2>
                         <p class="text-sm text-gray-400 mt-1">Kelola foto dan harga jasa Anda.</p>
                     </div>
                     <button onclick="openModal()" class="bg-[#d14d72] text-white px-8 py-4 rounded-2xl text-xs font-bold uppercase shadow-lg">+ Tambah Layanan</button>
                 </div>
-                <div id="container-layanan" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left text-left"></div>
+                <div id="container-layanan" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left"></div>
             </section>
 
             <section id="section-pesanan" class="content-section text-left">
                 <h2 class="text-2xl font-bold mb-10 text-gray-800 uppercase text-sm">Antrean Proyek</h2>
-                <div class="bg-white rounded-[2.5rem] border border-pink-50 overflow-hidden shadow-xl text-left">
+                <div class="bg-white rounded-[2.5rem] border border-pink-50 overflow-hidden shadow-xl">
                     <table class="w-full text-left">
                         <thead class="bg-pink-50/30 text-[10px] font-bold uppercase text-gray-400">
                             <tr><th class="p-8">Klien</th><th class="p-8">Layanan</th><th class="p-8">Total</th><th class="p-8 text-center">Aksi</th></tr>
@@ -110,10 +130,35 @@
             </section>
 
             <section id="section-ulasan" class="content-section text-left">
-                <h2 class="text-2xl font-bold mb-10 text-gray-800">Ulasan Klien</h2>
-                <div id="container-ulasan" class="space-y-6"></div>
+                <h2 class="text-2xl font-bold mb-10 text-gray-800 uppercase text-sm">Ulasan Klien</h2>
+                <div id="container-ulasan" class="space-y-6 text-left"></div>
             </section>
         </main>
+    </div>
+
+    <div id="modalTambahKat" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModalKat()"></div>
+        <div class="bg-white w-full max-w-md rounded-[3.5rem] relative z-10 p-12 shadow-2xl text-left">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Tambah Kategori</h3>
+            <form id="formKategori" class="space-y-4 text-left">
+                <div><label class="text-[10px] font-bold text-gray-400 uppercase ml-1">Nama Kategori</label>
+                <input type="text" id="katNamaInput" required class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm" placeholder="Contoh: Venue"></div>
+                <button type="submit" class="w-full bg-[#d14d72] text-white py-5 rounded-3xl font-bold uppercase text-xs">Simpan Kategori</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalEditKat" class="fixed inset-0 z-[5000] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md" onclick="closeEditKatModal()"></div>
+        <div class="bg-white w-full max-w-md rounded-[3rem] relative z-10 p-12 shadow-2xl text-left">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Edit Kategori</h3>
+            <form id="formEditKat" class="space-y-4">
+                <input type="hidden" id="editKatIndex">
+                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Nama Kategori</label>
+                <input type="text" id="editKatNama" class="w-full px-6 py-4 rounded-2xl border text-sm outline-none"></div>
+                <button type="submit" class="w-full bg-[#d14d72] text-white py-5 rounded-3xl font-bold uppercase text-xs">Simpan Perubahan</button>
+            </form>
+        </div>
     </div>
 
     <div id="modalEditLayanan" class="fixed inset-0 z-[5000] hidden flex items-center justify-center p-4">
@@ -122,8 +167,18 @@
             <h3 class="text-2xl font-bold text-gray-800 mb-6">Edit Katalog</h3>
             <form id="formEditLayanan" class="space-y-4">
                 <input type="hidden" id="editIndex">
-                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Nama</label><input type="text" id="editNama" class="w-full px-6 py-4 rounded-2xl border text-sm outline-none"></div>
-                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Harga</label><input type="number" id="editHarga" class="w-full px-6 py-4 rounded-2xl border text-sm outline-none"></div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Kategori</label>
+                    <select id="editKategori" class="w-full px-6 py-4 rounded-2xl border text-sm outline-none bg-gray-50"></select>
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Nama</label>
+                    <input type="text" id="editNama" class="w-full px-6 py-4 rounded-2xl border text-sm outline-none">
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Harga</label>
+                    <input type="number" id="editHarga" class="w-full px-6 py-4 rounded-2xl border text-sm outline-none">
+                </div>
                 <button type="submit" class="w-full bg-[#d14d72] text-white py-5 rounded-3xl font-bold uppercase text-xs">Simpan Perubahan</button>
             </form>
         </div>
@@ -132,19 +187,105 @@
     <div id="modalTambah" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal()"></div>
         <div class="bg-white w-full max-w-lg rounded-[3.5rem] relative z-10 p-12 shadow-2xl overflow-y-auto max-h-[90vh] text-left">
-            <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Tambah Layanan Baru</h3>
-            <form id="formLayanan" class="space-y-5 text-left text-left">
-                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Foto</label><input type="file" id="imageInput" accept="image/*" required class="w-full mt-2 text-xs"></div>
-                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Nama</label><input type="text" id="namaInput" required class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm"></div>
-                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Harga</label><input type="number" id="hargaInput" required class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm"></div>
-                <div><label class="text-[10px] font-bold text-gray-400 uppercase">Deskripsi</label><textarea id="deskripsiInput" rows="3" class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm resize-none"></textarea></div>
-                <button type="submit" class="w-full bg-[#d14d72] text-white py-5 rounded-3xl font-bold uppercase text-xs shadow-lg">Simpan</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center text-left">Tambah Layanan Baru</h3>
+            <form id="formLayanan" class="space-y-5 text-left">
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Pilih Kategori</label>
+                    <select id="kategoriInput" required class="w-full mt-2 px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm appearance-none"></select>
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Foto Produk</label>
+                    <input type="file" id="imageInput" accept="image/*" required class="w-full mt-2 text-xs">
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase text-left">Nama Layanan</label>
+                    <input type="text" id="namaInput" required class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm" placeholder="Contoh: Paket Wedding Silver">
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase text-left">Harga (Rp)</label>
+                    <input type="number" id="hargaInput" required class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm" placeholder="5000000">
+                </div>
+                <div class="text-left">
+                    <label class="text-[10px] font-bold text-gray-400 uppercase text-left">Deskripsi</label>
+                    <textarea id="deskripsiInput" rows="3" class="w-full px-6 py-4 rounded-2xl border bg-gray-50 outline-none text-sm resize-none" placeholder="Apa saja yang klien dapatkan?"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-[#d14d72] text-white py-5 rounded-3xl font-bold uppercase text-xs shadow-lg">Simpan Layanan</button>
             </form>
         </div>
     </div>
 
     <script>
         let myChart;
+
+        // --- KATEGORI LOGIC ---
+        function openModalKat() { document.getElementById('modalTambahKat').classList.remove('hidden'); }
+        function closeModalKat() { document.getElementById('modalTambahKat').classList.add('hidden'); }
+        function closeEditKatModal() { document.getElementById('modalEditKat').classList.add('hidden'); }
+
+        function renderKategori() {
+            const table = document.getElementById('table-kategori');
+            const data = JSON.parse(localStorage.getItem('jalin_categories')) || ["MUA", "Dekorasi", "Catering", "Fotografi"];
+            table.innerHTML = '';
+            
+            data.forEach((kat, index) => {
+                table.insertAdjacentHTML('beforeend', `
+                    <tr class="border-b border-pink-50 hover:bg-pink-50/20 transition">
+                        <td class="p-8 font-bold">${kat}</td>
+                        <td class="p-8 text-center flex justify-center gap-4">
+                            <button onclick="bukaEditKat(${index})" class="text-blue-500 font-bold uppercase hover:underline">Edit</button>
+                            <button onclick="hapusKat(${index})" class="text-red-400 font-bold uppercase hover:underline">Hapus</button>
+                        </td>
+                    </tr>`);
+            });
+            updateSelectOptions();
+        }
+
+        function bukaEditKat(index) {
+            const data = JSON.parse(localStorage.getItem('jalin_categories')) || ["MUA", "Dekorasi", "Catering", "Fotografi"];
+            document.getElementById('editKatIndex').value = index;
+            document.getElementById('editKatNama').value = data[index];
+            document.getElementById('modalEditKat').classList.remove('hidden');
+        }
+
+        document.getElementById('formKategori').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = JSON.parse(localStorage.getItem('jalin_categories')) || ["MUA", "Dekorasi", "Catering", "Fotografi"];
+            data.push(document.getElementById('katNamaInput').value);
+            localStorage.setItem('jalin_categories', JSON.stringify(data));
+            this.reset(); closeModalKat(); renderKategori();
+        });
+
+        document.getElementById('formEditKat').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const index = document.getElementById('editKatIndex').value;
+            const data = JSON.parse(localStorage.getItem('jalin_categories')) || ["MUA", "Dekorasi", "Catering", "Fotografi"];
+            data[index] = document.getElementById('editKatNama').value;
+            localStorage.setItem('jalin_categories', JSON.stringify(data));
+            closeEditKatModal(); renderKategori();
+        });
+
+        function hapusKat(index) {
+            if(confirm('Hapus kategori ini?')) {
+                const data = JSON.parse(localStorage.getItem('jalin_categories')) || ["MUA", "Dekorasi", "Catering", "Fotografi"];
+                data.splice(index, 1);
+                localStorage.setItem('jalin_categories', JSON.stringify(data));
+                renderKategori();
+            }
+        }
+
+        function updateSelectOptions() {
+            const data = JSON.parse(localStorage.getItem('jalin_categories')) || ["MUA", "Dekorasi", "Catering", "Fotografi"];
+            const inputs = ['kategoriInput', 'editKategori'];
+            inputs.forEach(id => {
+                const select = document.getElementById(id);
+                if(select) {
+                    select.innerHTML = '<option value="" disabled selected>Pilih Kategori...</option>' + 
+                    data.map(kat => `<option value="${kat}">${kat}</option>`).join('');
+                }
+            });
+        }
+
+        // --- LAYANAN LOGIC ---
         function openModal() { document.getElementById('modalTambah').classList.remove('hidden'); }
         function closeModal() { document.getElementById('modalTambah').classList.add('hidden'); }
         function closeEditModal() { document.getElementById('modalEditLayanan').classList.add('hidden'); }
@@ -152,6 +293,7 @@
         function switchSection(sectionId, element) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById('section-' + sectionId).classList.add('active');
+            if(sectionId === 'kategori') renderKategori();
             if(sectionId === 'pesanan') renderPesanan();
             if(sectionId === 'ulasan') renderUlasan();
             if(sectionId === 'layanan') renderLayanan();
@@ -187,6 +329,7 @@
                     <div class="bg-white p-8 rounded-[3rem] shadow-sm border border-pink-50 flex gap-8 text-left animate-fadeIn">
                         <img src="${item.gambar}" class="w-32 h-32 rounded-[2rem] object-cover bg-pink-50 shadow-inner">
                         <div class="flex-1 text-left">
+                            <p class="text-[9px] font-bold text-[#ffcad4] uppercase tracking-widest">${item.kategori || 'UMUM'}</p>
                             <h4 class="font-bold text-lg text-gray-800">${item.nama}</h4>
                             <p class="text-[#d14d72] font-bold mt-1 text-sm">${hargaRp}</p>
                             <div class="mt-6 flex gap-2">
@@ -200,7 +343,9 @@
 
         function bukaEditLayanan(index) {
             const data = JSON.parse(localStorage.getItem('jalin_services')) || [];
+            updateSelectOptions();
             document.getElementById('editIndex').value = index;
+            document.getElementById('editKategori').value = data[index].kategori || "";
             document.getElementById('editNama').value = data[index].nama;
             document.getElementById('editHarga').value = data[index].harga;
             document.getElementById('modalEditLayanan').classList.remove('hidden');
@@ -212,6 +357,7 @@
             const data = JSON.parse(localStorage.getItem('jalin_services')) || [];
             data[index].nama = document.getElementById('editNama').value;
             data[index].harga = document.getElementById('editHarga').value;
+            data[index].kategori = document.getElementById('editKategori').value;
             localStorage.setItem('jalin_services', JSON.stringify(data));
             closeEditModal(); renderLayanan();
         });
@@ -223,7 +369,7 @@
             services.forEach((item, index) => {
                 const clients = ["Susi & Budi", "Agus & Rina", "Dewi & Fajar"];
                 const hargaRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.harga);
-                table.insertAdjacentHTML('beforeend', `<tr class="border-b border-pink-50 hover:bg-pink-50/20 transition"><td class="p-8 font-bold">${clients[index % 3]}</td><td class="p-8 flex items-center gap-4 text-left"><img src="${item.gambar}" class="w-10 h-10 rounded-lg"><span>${item.nama}</span></td><td class="p-8 font-bold text-[#d14d72]">${hargaRp}</td><td class="p-8 text-center text-pink-400 font-bold cursor-pointer hover:underline">Detail</td></tr>`);
+                table.insertAdjacentHTML('beforeend', `<tr class="border-b border-pink-50 hover:bg-pink-50/20 transition"><td class="p-8 font-bold">${clients[index % 3]}</td><td class="p-8 flex items-center gap-4 text-left"><img src="${item.gambar}" class="w-10 h-10 rounded-lg"><div><p class="font-bold">${item.nama}</p><p class="text-[9px] text-gray-400 uppercase">${item.kategori || 'Umum'}</p></div></td><td class="p-8 font-bold text-[#d14d72]">${hargaRp}</td><td class="p-8 text-center text-pink-400 font-bold cursor-pointer hover:underline">Detail</td></tr>`);
             });
         }
 
@@ -232,7 +378,7 @@
             const services = JSON.parse(localStorage.getItem('jalin_services')) || [];
             container.innerHTML = '';
             services.forEach(item => {
-                container.insertAdjacentHTML('beforeend', `<div class="bg-white p-8 rounded-[2.5rem] border border-pink-50 flex items-center gap-8 text-left text-left"><img src="${item.gambar}" class="w-16 h-16 rounded-2xl object-cover shadow-sm"><div class="flex-1 text-left"><h4 class="font-bold text-gray-800 text-left">${item.nama}</h4><p class="text-yellow-400">★★★★★</p></div><div class="text-right font-bold">5.0</div></div>`);
+                container.insertAdjacentHTML('beforeend', `<div class="bg-white p-8 rounded-[2.5rem] border border-pink-50 flex items-center gap-8 text-left"><img src="${item.gambar}" class="w-16 h-16 rounded-2xl object-cover shadow-sm"><div class="flex-1 text-left text-left"><h4 class="font-bold text-gray-800">${item.nama}</h4><p class="text-[9px] text-gray-400 uppercase mb-1">${item.kategori || 'Umum'}</p><p class="text-yellow-400">★★★★★</p></div><div class="text-right font-bold">5.0</div></div>`);
             });
         }
 
@@ -242,7 +388,13 @@
             const reader = new FileReader();
             reader.onloadend = function() {
                 const data = JSON.parse(localStorage.getItem('jalin_services')) || [];
-                data.push({ nama: document.getElementById('namaInput').value, harga: document.getElementById('hargaInput').value, deskripsi: document.getElementById('deskripsiInput').value, gambar: reader.result });
+                data.push({ 
+                    nama: document.getElementById('namaInput').value, 
+                    harga: document.getElementById('hargaInput').value, 
+                    deskripsi: document.getElementById('deskripsiInput').value, 
+                    kategori: document.getElementById('kategoriInput').value,
+                    gambar: reader.result 
+                });
                 localStorage.setItem('jalin_services', JSON.stringify(data));
                 this.reset(); closeModal(); renderLayanan();
             }
@@ -250,16 +402,19 @@
         });
 
         function hapusLayanan(index) {
-            const data = JSON.parse(localStorage.getItem('jalin_services'));
-            data.splice(index, 1);
-            localStorage.setItem('jalin_services', JSON.stringify(data));
-            renderLayanan();
+            if(confirm('Hapus layanan ini?')){
+                const data = JSON.parse(localStorage.getItem('jalin_services'));
+                data.splice(index, 1);
+                localStorage.setItem('jalin_services', JSON.stringify(data));
+                renderLayanan();
+            }
         }
 
         window.onload = function() {
             const ctx = document.getElementById('vendorChart').getContext('2d');
             myChart = new Chart(ctx, { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'], datasets: [{ label: 'Sales', data: [5, 8, 4, 12, 10, 0], borderColor: '#d14d72', backgroundColor: 'rgba(209, 77, 114, 0.1)', fill: true, tension: 0.4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } } });
             renderLayanan();
+            renderKategori();
             const n = localStorage.getItem('userJalin'); 
             if(n) {
                 document.getElementById('vendor-name-display').innerText = n;
